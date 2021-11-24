@@ -34,8 +34,26 @@ a {
   padding: 0 15px 0 120px;
 }
 
-@media (max-width: 1100px) {
-  .container {
-    padding: 0 15px 105px;
+.title {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 100%;
+  color: $white;
+}
+
+.swiper-pagination-bullet {
+  background: #20272E;
+  width: 12px;
+  height: 17px;
+  border-radius: 0;
+  bottom: 0;
+  &-active {
+    background-color: #4F5F70;
+  }
+}
+
+@media (max-width: 777px) {
+  .title {
+    font-size: 34px;
   }
 }
