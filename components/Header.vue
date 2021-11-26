@@ -26,12 +26,12 @@
           <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>
         </li>
         <li class="menu__list-item">
-          <nuxt-link class="menu__list-link burger-menu__btn" to="/login">
+          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/login">
             <my-button class="secondary">Login</my-button>
           </nuxt-link>
         </li>
         <li class="menu__list-item">
-          <nuxt-link class="menu__list-link burger-menu__btn" to="/register">
+          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/register">
             <my-button>Sign Up</my-button>
           </nuxt-link>
         </li>
@@ -57,10 +57,10 @@
       </ul>
     </nav>
     <div class="header__btns">
-      <nuxt-link class="header__btn" to="/login">
+      <nuxt-link class="header__btn" to="/auth/login">
         <my-button class="secondary">Login</my-button>
       </nuxt-link>
-      <nuxt-link class="header__btn" to="/register">
+      <nuxt-link class="header__btn" to="/auth/register">
         <my-button>Sign Up</my-button>
       </nuxt-link>
     </div>

@@ -6,10 +6,10 @@
         Prepare for your esports career and get ready for awesome tournaments with big prize pools and many fun! <span>Register Now!</span>
       </p>
       <div class="home__btns">
-        <nuxt-link class="home__btn" to="/login">
+        <nuxt-link class="home__btn" to="/auth/login">
           <my-button class="secondary">Login</my-button>
         </nuxt-link>
-        <nuxt-link class="home__btn" to="/register">
+        <nuxt-link class="home__btn" to="/auth/register">
           <my-button>Sign Up</my-button>
         </nuxt-link>
       </div>
@@ -26,18 +26,14 @@
     <div class="home__partners">
       <div class="home__partners-title title">Partners</div>
       <div class="home__partners-items">
-        <div class="home__partners-item" v-for="item in 7" :key="item">
+        <div class="home__partners-item">
           <img src="../assets/images/partners/partner-01.png" alt="">
         </div>
       </div>
     </div>
     <div class="home__games">
       <div class="home__games-title title">Games</div>
-      <div class="home__games-items">
-        <games-card title="Dota II"/>
-        <games-card title="Dota II"/>
-        <games-card title="Dota II"/>
-      </div>
+      <default-slider />
     </div>
   </div>
 </template>
@@ -46,7 +42,7 @@
 export default {
   head: {
     title: 'Home'
-  }
+  },
 }
 </script>
 
