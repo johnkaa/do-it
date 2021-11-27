@@ -1,8 +1,15 @@
 <template>
-  <button class="button">
+  <button class="button"
+          :disabled="disabled">
     <slot />
   </button>
 </template>
+
+<script>
+export default {
+  props: ['disabled']
+}
+</script>
 
 <style lang="scss" scoped>
   @import "assets/styles/var";
@@ -17,9 +24,15 @@
     cursor: pointer;
     transition: all .3s;
     width: 100%;
+    &:disabled {
+      background: gray;
+      cursor: default;
+    }
+    &:disabled:hover {
+      background-color: gray;
+    }
     &:hover {
       background: lighten($primary-light, .5);
-      transform: scale(1.1);
     }
   }
   .secondary {
