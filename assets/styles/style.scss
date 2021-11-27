@@ -40,6 +40,16 @@ a {
   line-height: 100%;
   color: $white;
 }
+.title-fz32 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 100%;
+  color: $white;
+}
+
+.link {
+  color: #0A68F5;
+}
 
 .swiper-pagination-bullet {
   background: #20272E;
@@ -52,8 +62,17 @@ a {
   }
 }
 
+@media (max-width: 1100px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
 @media (max-width: 777px) {
   .title {
     font-size: 34px;
+  }
+  .title-fz32 {
+    font-size: 22px;
   }
 }
