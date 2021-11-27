@@ -34,6 +34,10 @@ export default {
     &:hover {
       background: lighten($primary-light, .5);
     }
+    &:focus {
+      outline: none;
+      background: lighten($primary-light, .5);
+    }
   }
   .secondary {
     background: #1A222D;
