@@ -3,8 +3,10 @@
     <button class="datepicker__title" type="button" @click="setActive">{{ date || 'dd-mm-yyyy' }}</button>
     <v-date-picker
       class="datepicker__calendar"
+      locale="en"
       title-position="left"
-      :max-date="'Fri Dec 31 2015 02:39:31 GMT+0300 (Москва, стандартное время)'"
+      :min-date="'Fri Dec 31 1955 02:39:31'"
+      :max-date="'Fri Dec 31 2015 02:39:31'"
       v-model="select"/>
   </div>
 </template>
