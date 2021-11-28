@@ -2,8 +2,8 @@
   <label class="checkbox__wrapper">
     <input class="checkbox"
            type="checkbox"
-           @click="updateActive"
            v-model="active"
+           @click="updateActive"
            :checked="checked"
            :disabled="disabled">
     <span class="checkbox-style"></span>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     updateActive() {
-      this.$emit('updateCheckbox', this.active)
+      setTimeout(() => this.$emit('updateCheckbox', this.active), 10)
     }
   }
 }
