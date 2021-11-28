@@ -9,7 +9,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', href: '~assets/images/mobile-logo.png' }
+      { rel: 'shortcut icon', href: '/_nuxt/assets/images/logo.png' }
     ]
   },
 
@@ -22,6 +22,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/swiper', mode: 'client' },
+    { src: '~plugins/vuelidate', mode: 'client' },
+    { src: '~plugins/v-calendar', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,7 +39,27 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    // https://firebase.nuxtjs.org/
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyAzrqOOibxUJ6jVh1zOELkKzuRwzbCAEOA",
+          authDomain: "doit-8389f.firebaseapp.com",
+          databaseURL: "https://doit-8389f-default-rtdb.firebaseio.com",
+          projectId: "doit-8389f",
+          storageBucket: "doit-8389f.appspot.com",
+          messagingSenderId: "782696520349",
+          appId: "1:782696520349:web:38e57f2ce839ebd7d19274"
+        },
+        services: {
+          auth: true, // Just as example. Can be any other service.
+          database: true,
+          storage: true
+        }
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -12,13 +12,18 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/firebase": "^8.0.0",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
+    "country-list": "^2.2.0",
+    "firebase": "^9.5.0",
     "normalize-scss": "^7.0.1",
     "nuxt": "^2.15.7",
     "reset-css": "^5.0.1",
     "swiper": "^5.4.5",
-    "vue-awesome-swiper": "^4.1.1"
+    "v-calendar": "^2.3.4",
+    "vue-awesome-swiper": "^4.1.1",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
