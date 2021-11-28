@@ -2,6 +2,8 @@
   <label class="checkbox__wrapper">
     <input class="checkbox"
            type="checkbox"
+           @click="updateActive"
+           v-model="active"
            :checked="checked"
            :disabled="disabled">
     <span class="checkbox-style"></span>
@@ -11,7 +13,17 @@
 
 <script>
 export default {
-  props: ['text', 'checked', 'disabled']
+  props: ['text', 'checked', 'disabled'],
+  data() {
+    return {
+      active: false
+    }
+  },
+  methods: {
+    updateActive() {
+      this.$emit('updateCheckbox', this.active)
+    }
+  }
 }
 </script>
 
