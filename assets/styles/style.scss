@@ -6,26 +6,8 @@
 html {
   box-sizing: border-box;
 }
-
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: inherit;
-}
-
-body {
-  font-family: 'Rubik', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: $white;
-  line-height: 24px;
-  background: #0F1215;
-  height: 100vh;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 ::-webkit-scrollbar {
@@ -42,6 +24,20 @@ a {
   background-color: darken(#627CA3, 10%);
 }
 
+body {
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: $white;
+  line-height: 24px;
+  background: #0F1215;
+  height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
 .container {
   max-width: 1300px;
   margin: 0 auto;
@@ -78,6 +74,34 @@ a {
   &-active {
     background-color: #4F5F70;
   }
+}
+
+.vc-container {
+  background-color: #0F1215 !important;
+  border: 1px solid #16263D !important;
+}
+.vc-title {
+  color: #627CA3 !important;
+}
+.vc-weekday {
+  color: #627CA3 !important;
+}
+.vc-day-content {
+  color: rgba(#627CA3, .7);
+}
+.vc-arrow:hover {
+  background: none !important;
+}
+.vc-popover-content {
+  background-color: #0F1215 !important;
+  border: 1px solid #16263D !important;
+}
+.vc-nav-item.is-active {
+  background-color: #1472FF !important;
+  color: #fff !important;
+}
+.vc-nav-item:focus {
+  border: 1px solid #16263D !important;
 }
 
 @media (max-width: 1100px) {
