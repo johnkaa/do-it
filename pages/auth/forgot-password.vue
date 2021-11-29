@@ -1,7 +1,7 @@
 <template>
   <div class="forgot-password">
     <div class="container">
-      <div class="forgot-password__logo"><img src="../../assets/images/logo.png" alt=""></div>
+      <div class="forgot-password__logo"><img src="/images/logo.png" alt=""></div>
       <h2 class="forgot-password__title title-fz32">Forgot password</h2>
       <form class="forgot-password__form" @submit.prevent="submit">
         <div class="forgot-password__form-items">

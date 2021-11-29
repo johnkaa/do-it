@@ -3,32 +3,32 @@
     <ul class="sidebar__list">
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-01.svg" alt="">
+          <img src="/images/sidebar/item-01.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-02.svg" alt="">
+          <img src="/images/sidebar/item-02.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-03.svg" alt="">
+          <img src="/images/sidebar/item-03.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-04.svg" alt="">
+          <img src="/images/sidebar/item-04.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-05.svg" alt="">
+          <img src="/images/sidebar/item-05.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
         <nuxt-link class="sidebar__list-link" to="/">
-          <img src="~assets/images/sidebar/item-06.svg" alt="">
+          <img src="/images/sidebar/item-06.svg" alt="">
         </nuxt-link>
       </li>
     </ul>

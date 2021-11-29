@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home__top">
+    <div class="home__top" v-if="!this.$fire.auth.currentUser">
       <h1 class="home__title">DOIT BETA</h1>
       <p class="home__text">
         Prepare for your esports career and get ready for awesome tournaments with big prize pools and many fun! <span>Register Now!</span>
@@ -27,7 +27,7 @@
       <div class="home__partners-title title">Partners</div>
       <div class="home__partners-items">
         <div class="home__partners-item">
-          <img src="../assets/images/partners/partner-01.png" alt="">
+          <img src="/images/partners/partner-01.png" alt="">
         </div>
       </div>
     </div>
@@ -49,11 +49,11 @@ export default {
 <style lang="scss" scoped>
   @import "assets/styles/var";
   .home {
-    background-image: url(../assets/images/bg.jpg);
+    background-image: url(static/images/bg.jpg);
     &__top {
       text-align: center;
       margin-top: 50px;
-      background-image: url(../assets/images/main-bg.svg);
+      background-image: url(static/images/main-bg.svg);
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;

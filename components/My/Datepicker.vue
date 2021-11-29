@@ -62,7 +62,7 @@ export default {
         content: '';
         width: 22px;
         height: 22px;
-        background-image: url(assets/images/icons/datepicker.svg);
+        background-image: url(static/images/icons/datepicker.svg);
         position: absolute;
         right: 16px;
         top: 50%;

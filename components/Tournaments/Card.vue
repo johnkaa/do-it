@@ -1,6 +1,6 @@
 <template>
   <div class="tournaments-card">
-    <img class="tournaments-card__img" src="~assets/images/games/dota-01.jpg" alt="">
+    <img class="tournaments-card__img" src="/images/games/dota-tournament.jpg" alt="">
     <div class="tournaments-card__inner">
       <div class="tournaments-card__title">Tournament’s name will be here, maybe, in two lines</div>
       <div class="tournaments-card__items">

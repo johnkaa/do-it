@@ -1,7 +1,7 @@
 <template>
   <div class="verify-email">
     <div class="container">
-      <div class="verify-email__logo"><img src="../../../assets/images/logo.png" alt=""></div>
+      <div class="verify-email__logo"><img src="/images/logo.png" alt=""></div>
       <h2 class="verify-email__title">You registered on <nuxt-link class="link" to="/">doit.gg</nuxt-link> to continue verify your email</h2>
       <form class="verify-email__form" @submit.prevent="submit">
         <my-button class="verify-email__button">Verify email</my-button>

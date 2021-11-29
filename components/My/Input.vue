@@ -68,7 +68,7 @@ export default {
         content: '';
         width: 20px;
         height: 20px;
-        background-image: url(assets/images/icons/success.svg);
+        background-image: url(static/images/icons/success.svg);
         position: absolute;
         right: 20px;
         top: 50%;
@@ -84,7 +84,7 @@ export default {
         content: '';
         width: 20px;
         height: 20px;
-        background-image: url(assets/images/icons/fail.svg);
+        background-image: url(static/images/icons/fail.svg);
         position: absolute;
         right: 20px;
         top: 50%;

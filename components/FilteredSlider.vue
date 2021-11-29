@@ -9,16 +9,7 @@
     <swiper
       class="filtered-slider__items"
       :options="swiperOptions">
-      <swiper-slide class="filtered-slider__item">
-        <tournaments-card />
-      </swiper-slide>
-      <swiper-slide class="filtered-slider__item">
-        <tournaments-card />
-      </swiper-slide>
-      <swiper-slide class="filtered-slider__item">
-        <tournaments-card />
-      </swiper-slide>
-      <swiper-slide class="filtered-slider__item">
+      <swiper-slide class="filtered-slider__item" v-for="item in 9" :key="item">
         <tournaments-card />
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -47,7 +38,6 @@ export default {
         //     slidesPerGroup: 3,
         //   },
         // },
-        // Some Swiper option/callback...
       }
     }
   },
@@ -73,7 +63,7 @@ export default {
           content: '';
           width: 32px;
           height: 32px;
-          background-image: url(assets/images/icons/stream.svg);
+          background-image: url(static/images/icons/stream.svg);
           position: absolute;
           right: 0;
           top: 50%;

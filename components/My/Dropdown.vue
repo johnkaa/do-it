@@ -55,7 +55,7 @@ export default {
         content: '';
         width: 15px;
         height: 9px;
-        background-image: url(assets/images/icons/dropdown-arrow.svg);
+        background-image: url(static/images/icons/dropdown-arrow.svg);
         position: absolute;
         right: 16px;
         top: 50%;

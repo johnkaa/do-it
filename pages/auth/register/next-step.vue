@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <div class="container">
-      <div class="register__logo"><img src="../../../assets/images/logo.png" alt=""></div>
+      <div class="register__logo"><img src="/images/logo.png" alt=""></div>
       <h2 class="register__title title-fz32">Sign up 2/2</h2>
       <form class="register__form" @submit.prevent="submit">
         <div class="register__form-items">
@@ -46,10 +46,10 @@
       <div class="register__with">
         <div class="register__with-text">or signup with</div>
         <div class="register__with-items">
-          <img class="register__with-item" src="../../../assets/images/login-with/facebook.png" alt="">
-          <img class="register__with-item" src="../../../assets/images/login-with/battle-net.png" alt="">
-          <img class="register__with-item" src="../../../assets/images/login-with/google.png" alt="">
-          <img class="register__with-item" src="../../../assets/images/login-with/steam.png" alt="">
+          <img class="register__with-item" src="/images/login-with/facebook.png" alt="">
+          <img class="register__with-item" src="/images/login-with/battle-net.png" alt="">
+          <img class="register__with-item" src="/images/login-with/google.png" alt="">
+          <img class="register__with-item" src="/images/login-with/steam.png" alt="">
         </div>
       </div>
       <div class="register__already">

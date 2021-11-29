@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container">
-      <div class="login__logo"><img src="../../assets/images/logo.png" alt=""></div>
+      <div class="login__logo"><img src="/assets/images/logo.png" alt=""></div>
       <h2 class="login__title title-fz32">Login</h2>
       <form class="login__form" @submit.prevent="submit">
         <div class="login__form-items">
@@ -31,10 +31,10 @@
       <div class="login__with">
         <div class="login__with-text">or login with</div>
         <div class="login__with-items">
-          <img class="login__with-item" src="../../assets/images/login-with/facebook.png" alt="">
-          <img class="login__with-item" src="../../assets/images/login-with/battle-net.png" alt="">
-          <img class="login__with-item" src="../../assets/images/login-with/google.png" alt="">
-          <img class="login__with-item" src="../../assets/images/login-with/steam.png" alt="">
+          <img class="login__with-item" src="/images/login-with/facebook.png" alt="">
+          <img class="login__with-item" src="/images/login-with/battle-net.png" alt="">
+          <img class="login__with-item" src="/images/login-with/google.png" alt="">
+          <img class="login__with-item" src="/images/login-with/steam.png" alt="">
         </div>
       </div>
       <div class="login__forgot">
