@@ -79,6 +79,8 @@ export default {
     }
     &__item {
       max-width: 350px;
+      max-height: 500px;
+      height: 100%;
       width: 100%;
       display: block;
     }
