@@ -66,9 +66,13 @@ export default {
       this.$v.password.$touch()
       if(this.$v.email.$dirty && !this.$v.email.required) {
         this.emailErrorMsg = 'Required field'
+      } else if(this.$v.email.$dirty && !this.$v.email.email) {
+        this.emailErrorMsg = 'Invalid email'
       }
       if(this.$v.password.$dirty && !this.$v.password.required) {
         this.passwordErrorMsg = 'Required field'
+      } else if(this.$v.password.$dirty && !this.$v.password.minLength) {
+        this.passwordErrorMsg = 'Password must be at least 6 characters'
       }
       if(!this.$v.email.$invalid && !this.$v.password.$invalid) {
         this.$router.push({

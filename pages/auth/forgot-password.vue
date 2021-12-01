@@ -11,7 +11,6 @@
                       placeholder="google@gmail.com"
                       :fail="$v.email.$error"
                       :errorMessage="emailErrorMsg"
-                      :success="!$v.email.$invalid"
                       @updateField="updateEmail"/>
           </div>
           <div class="forgot-password__form-item">

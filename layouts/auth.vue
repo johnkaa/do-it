@@ -6,6 +6,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  head: {
+    title: 'Auth'
+  },
+}
+</script>
+
 <style lang="scss" scoped>
   .auth-layout {
     position: relative;

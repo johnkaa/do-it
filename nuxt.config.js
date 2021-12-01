@@ -9,7 +9,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'shortcut icon', href: '/_nuxt/assets/images/logo.png' }
+      { rel: 'shortcut icon', type: 'image/png', href: '/images/logo.png' }
     ]
   },
 
@@ -54,7 +54,14 @@ export default {
           appId: "1:782696520349:web:38e57f2ce839ebd7d19274"
         },
         services: {
-          auth: true, // Just as example. Can be any other service.
+          auth: {
+            persistence: 'local', // default
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+            ssr: true
+          },
           database: true,
           storage: true
         }

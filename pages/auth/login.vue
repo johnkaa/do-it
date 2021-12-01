@@ -11,7 +11,6 @@
                       placeholder="google@gmail.com"
                       :fail="$v.email.$error"
                       :errorMessage="emailErrorMsg"
-                      :success="!$v.email.$invalid"
                       @updateField="updateEmail"/>
           </div>
           <div class="login__form-item">
@@ -20,7 +19,6 @@
                       placeholder="Password"
                       :fail="$v.password.$error"
                       :errorMessage="passwordErrorMsg"
-                      :success="!$v.password.$invalid"
                       @updateField="updatePassword"/>
           </div>
           <div class="login__form-item">

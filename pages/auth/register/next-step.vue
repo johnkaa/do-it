@@ -110,6 +110,7 @@ export default {
             id: (+new Date()-(+new Date()%100)) / 100,
             uid: this.uid,
             email: this.$route.query.email,
+            password: this.$route.query.password,
             emailVerified: this.emailVerified,
             name: '',
             username: this.username,
