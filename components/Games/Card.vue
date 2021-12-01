@@ -1,5 +1,5 @@
 <template>
-  <div class="games__item">
+  <div class="games__item mainPage" :class="{ mainPage: mainPage }">
     <div class="games__item-img">
       <img :src="img" alt="">
       <div class="games__item-text">{{ title }}</div>
@@ -9,16 +9,21 @@
 
 <script>
 export default {
-  props: ['title', 'img']
+  props: ['title', 'img', 'mainPage']
 }
 </script>
 
 <style lang="scss" scoped>
   .games__item {
     cursor: pointer;
+    max-height: 500px;
+    height: 100%;
+    padding-bottom: 50px;
     &-img {
       position: relative;
       img {
+        width: 100%;
+        max-height: 500px;
         border-radius: 4px;
       }
     }
@@ -50,10 +55,18 @@ export default {
         text-align: center;
       }
     }
-  }
-  @media (max-width: 400px) {
-    .games__item img {
-      object-position: top;
+    .games__item.mainPage {
+      padding-bottom: 20px;
+      .games__item {
+        &-img {
+          width: 300px;
+          max-height: 600px;
+          img {
+            max-height: 600px;
+            width: 100%;
+          }
+        }
+      }
     }
   }
 </style>

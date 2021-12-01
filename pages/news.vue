@@ -22,6 +22,9 @@
 
 <script>
 export default {
+  head: {
+    title: 'News'
+  },
   async mounted() {
     const newsRef = this.$fire.database.ref('news')
     try {

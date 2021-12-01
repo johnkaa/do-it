@@ -16,6 +16,9 @@
 
 <script>
 export default {
+  head: {
+    title: 'Games'
+  },
   async mounted() {
     const gamesRef = this.$fire.database.ref('games')
     try {

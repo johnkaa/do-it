@@ -3,14 +3,20 @@
     <div class="filtered-slider__top">
       <div class="filtered-slider__name title" :class="{ streams: streams }">{{ title }}</div>
       <div class="filtered-slider__categories">
-        <my-select-item class="filtered-slider__categories-item" v-for="item in 5" :key="item">{{ item }}</my-select-item>
+        <select-categories />
       </div>
     </div>
     <swiper
       class="filtered-slider__items"
       :options="swiperOptions">
-      <swiper-slide class="filtered-slider__item" v-for="item in 9" :key="item">
+      <swiper-slide class="filtered-slider__item" v-for="item in 10" :key="item" v-if="tournaments">
         <tournaments-card />
+      </swiper-slide>
+      <swiper-slide class="filtered-slider__item" v-for="(item, index) in items" :key="index" v-if="news">
+        <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
+      </swiper-slide>
+      <swiper-slide class="filtered-slider__item" v-for="item in 10" :key="item" v-if="streams">
+        <div>stream</div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -19,25 +25,37 @@
 
 <script>
 export default {
-  props: ['title', 'streams'],
+  props: ['title', 'tournaments', 'news', 'streams', 'items'],
   data() {
     return {
       swiperOptions: {
         slidesPerView: "3",
         slidesPerGroup: "3",
         spaceBetween: 30,
-        loopFillGroupWithBlank: true,
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
         },
-        // breakpoints: {
-        //   768: {
-        //     spaceBetween: 30,
-        //     slidesPerView: 'auto',
-        //     slidesPerGroup: 3,
-        //   },
-        // },
+        autoplay: {
+          delay: 5000,
+        },
+        breakpoints: {
+          1250: {
+            slidesPerView: "3",
+            slidesPerGroup: "3",
+            spaceBetween: 30,
+          },
+          750: {
+            slidesPerView: "2",
+            slidesPerGroup: "2",
+            spaceBetween: 20,
+          },
+          320: {
+            slidesPerView: "1",
+            slidesPerGroup: "1",
+            spaceBetween: 5,
+          },
+        },
       }
     }
   },
@@ -73,11 +91,17 @@ export default {
     }
     &__items {
       padding-bottom: 55px;
+      cursor: pointer;
     }
   }
   @media (max-width: 777px) {
     .filtered-slider__categories {
       display: none;
+    }
+  }
+  @media (max-width: 500px) {
+    .filtered-slider {
+      max-width: 310px;
     }
   }
 </style>

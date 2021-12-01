@@ -40,6 +40,7 @@ export default {
     &__img {
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
+      width: 100%;
     }
     &__inner {
       padding: 30px 22px;
@@ -59,6 +60,13 @@ export default {
       &-title {
         color: #8996A3;
         line-height: 16px;
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    .tournaments-card {
+      &__inner {
+        padding: 15px 11px;
       }
     }
   }

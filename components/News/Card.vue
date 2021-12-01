@@ -22,6 +22,7 @@ export default {
   .news-card {
     max-width: 273px;
     background-color: #20252B;
+    width: 100%;
     &__img {
       width: 100%;
       height: 240px;
@@ -122,7 +123,16 @@ export default {
       }
     }
     .news-card {
-      max-width: 100%;
+      max-width: 305px;
+      &__img {
+        max-width: 305px;
+      }
+      &__title {
+        max-width: 300px;
+      }
+      &__text {
+        max-width: 290px;
+      }
     }
   }
 </style>
