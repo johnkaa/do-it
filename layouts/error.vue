@@ -24,6 +24,9 @@
 
 <script>
 export default {
+  head: {
+    title: 'Error'
+  },
   props: ['error']
 }
 </script>
@@ -31,9 +34,6 @@ export default {
 <style lang="scss" scoped>
   .error__wrapper {
     height: 100%;
-  }
-  .container {
-    //max-width: 1500px;
   }
   .error {
     font-family: 'Roboto', sans-serif;
