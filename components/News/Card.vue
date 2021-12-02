@@ -2,7 +2,7 @@
   <div class="news-card" :class="{ mainPage: mainPage, bigSize: bigSize }">
     <img class="news-card__img" :src="img" alt="" />
     <div class="news-card__title">{{ title }}</div>
-    <div class="news-card__text">{{ text }}</div>
+    <div class="news-card__text">{{ description }}</div>
   </div>
 </template>
 
@@ -11,8 +11,15 @@ export default {
   props: ['mainPage', 'bigSize', 'img', 'title', 'text'],
   mounted() {
     if(this.mainPage) {
-      this.text.substr(0,50)
-      this.text = this.text + '...'
+      if(this.text.left > 50) {
+        this.text.substr(0,50)
+        this.description = this.text + '...'
+      }
+    }
+  },
+  data() {
+    return {
+      description: this.text
     }
   }
 }

@@ -16,7 +16,7 @@
         <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
       </swiper-slide>
       <swiper-slide class="filtered-slider__item" v-for="item in 10" :key="item" v-if="streams">
-        <div>stream</div>
+        <tournaments-card />
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>

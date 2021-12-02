@@ -20,14 +20,14 @@
     <div class="home__news">
       <filtered-slider title="News" :items="news" :news="true"/>
     </div>
-<!--    <div class="home__streams">-->
-<!--      <h2>Streams</h2>-->
-<!--&lt;!&ndash;      <filtered-slider title="Streams" :streams="true"/>&ndash;&gt;-->
+    <div class="home__streams">
+      <h2>Streams</h2>
+      <filtered-slider title="Streams" :streams="true"/>
 <!--      <div v-for="item in streams" :key="item">-->
 <!--        {{ item }}-->
 <!--        <iframe width="560" height="315" :src="`https://www.youtube.com/embed/${item.videoId}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
 <!--      </div>-->
-<!--    </div>-->
+    </div>
     <div class="home__partners">
       <div class="home__partners-title title">Partners</div>
       <div class="home__partners-items">
