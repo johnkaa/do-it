@@ -43,15 +43,6 @@
           </div>
         </div>
       </form>
-      <div class="register__with">
-        <div class="register__with-text">or signup with</div>
-        <div class="register__with-items">
-          <img class="register__with-item" src="/images/login-with/facebook.png" alt="">
-          <img class="register__with-item" src="/images/login-with/battle-net.png" alt="">
-          <img class="register__with-item" src="/images/login-with/google.png" alt="">
-          <img class="register__with-item" src="/images/login-with/steam.png" alt="">
-        </div>
-      </div>
       <div class="register__already">
         <nuxt-link class="link" to="/auth/login">Already have an account?</nuxt-link>
       </div>
@@ -67,6 +58,7 @@ export default {
   layout: 'auth',
   mounted() {
     this.countries = getNames()
+    this.getDateNow()
   },
   data() {
     return {
@@ -74,13 +66,14 @@ export default {
       country: '',
       countries: '',
       dateOfBirth: '',
+      age: 0,
+      dateRegistration: '',
       uid: '',
       emailVerified: '',
       checkbox: false,
       checkboxError: false,
     }
   },
-
   validations: {
     username: { required, minLength: minLength(3) },
     country: { required },
@@ -106,6 +99,7 @@ export default {
               this.emailVerified = userCredential.user.emailVerified
             })
           const usersRef = await this.$fire.database.ref(`users/${(+new Date()-(+new Date()%100)) / 100}`)
+          this.getAge()
           await usersRef.set({
             id: (+new Date()-(+new Date()%100)) / 100,
             uid: this.uid,
@@ -115,7 +109,9 @@ export default {
             name: '',
             username: this.username,
             country: this.country,
+            age: this.age,
             dateOfBirth: this.dateOfBirth,
+            dateRegistration: this.dateRegistration,
             img: 'https://i.pinimg.com/736x/df/72/d5/df72d51685e99a265ad186bada408e27.jpg',
             lvl: 0,
             balance: {
@@ -134,6 +130,34 @@ export default {
           }
         })
       }
+    },
+    getDateNow() {
+      const dateObj = new Date()
+      let date = dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      if(dateObj.getDate() < 10) {
+        date = '0' + dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      if((dateObj.getMonth() + 1) < 10) {
+        date = dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      if(dateObj.getDate() < 10 && (dateObj.getMonth() + 1) < 10) {
+        date = '0' + dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      this.dateRegistration = date
+    },
+    getAge() {
+      const now = new Date() //Текущя дата
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()) //Текущя дата без времени
+      const dateOfBirthArray = this.dateOfBirth.split('-')
+      const dob = new Date(dateOfBirthArray[2], (dateOfBirthArray[1] - 1), dateOfBirthArray[0]) //Дата рождения
+      let age
+      //Возраст = текущий год - год рождения
+      age = today.getFullYear() - dob.getFullYear()
+      //Если ДР в этом году ещё предстоит, то вычитаем из age один год
+      if ((today.getMonth() < dateOfBirthArray[1] - 1) || (today.getDate() < dateOfBirthArray[0])) {
+        age--
+      }
+      this.age = age
     },
     updateUsername(field) {
       this.username = field
@@ -183,29 +207,6 @@ export default {
     &-checkbox-text {
       color: #627CA3;
       font-size: 14px;
-    }
-  }
-  &__with {
-    &-text {
-      color: #627CA3;
-      margin-bottom: 16px;
-    }
-    &-items {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-    &-item {
-      border: 1px solid #16263D;
-      padding: 8px;
-      cursor: pointer;
-      & + & {
-        margin-left: 8px;
-      }
-      &:last-child {
-        padding: 12px;
-      }
     }
   }
   &__fail-message {

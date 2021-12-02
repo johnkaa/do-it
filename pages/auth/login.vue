@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container">
-      <div class="login__logo"><img src="/assets/images/logo.png" alt=""></div>
+      <div class="login__logo"><img src="/images/logo.png" alt=""></div>
       <h2 class="login__title title-fz32">Login</h2>
       <form class="login__form" @submit.prevent="submit">
         <div class="login__form-items">
@@ -135,6 +135,8 @@ export default {
       border: 1px solid #16263D;
       padding: 8px;
       cursor: pointer;
+      max-width: 48px;
+      max-height: 48px;
       & + & {
         margin-left: 8px;
       }

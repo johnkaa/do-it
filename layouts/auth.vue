@@ -22,6 +22,8 @@ export default {
       position: absolute;
       cursor: pointer;
       top: 16px;
+      max-width: 32px;
+      max-height: 32px;
     }
     &__back {
       left: 16px;
