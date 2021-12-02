@@ -9,7 +9,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'shortcut icon', type: 'image/png', href: '/images/logo.png' }
+      { rel: 'shortcut icon', type: 'image/png', href: 'static/images/logo.png' }
     ]
   },
 
@@ -57,6 +57,7 @@ export default {
           auth: {
             persistence: 'local', // default
             initialize: {
+              onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
               onAuthStateChangedAction: 'onAuthStateChangedAction',
               subscribeManually: false
             },
@@ -75,7 +76,11 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
+      name: 'Doit Beta',
       lang: 'en'
+    },
+    icon: {
+      source: 'static/images/logo.png'
     }
   },
 
