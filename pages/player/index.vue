@@ -1,0 +1,148 @@
+<template>
+  <div class="player">
+    <div class="player__mobile">
+      <div class="player__img">
+        <img :src="user.img" alt="">
+      </div>
+      <div class="player__mobile-name">
+        <div class="player__name" v-if="user.name">{{ user.name }}</div>
+        <div class="player__username">{{ user.username }}</div>
+        <div class="player__team" v-if="user.mainTeam">{{ user.mainTeam }}</div>
+        <div class="player__icons">
+          <img class="player__icon" src="/images/icons/plus.svg" alt="">
+          <img class="player__icon" src="/images/icons/mail.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="player__info">
+      <div class="player__title">Profile</div>
+      <div class="player__items">
+        <div class="player__item"><span>ID</span>{{ user.id }}</div>
+        <div class="player__item" v-if="user.name"><span>Name</span>{{ user.name }}</div>
+        <div class="player__item"><span>Nickname</span>{{ user.username }}</div>
+        <div class="player__item"><span>With us from</span>{{ user.dateRegistration }}</div>
+        <div class="player__item" v-if="user.sex && user.age"><span>Sex / Age</span>{{ user.sex }} / {{ user.age }}</div>
+        <div class="player__item" v-if="user.nationality"><span>Nationality</span>{{ user.nationality }}</div>
+        <div class="player__item"><span>Country</span>{{ user.country }}</div>
+        <div class="player__item" v-if="user.website"><span>Web-site</span>{{ user.website }}</div>
+      </div>
+    </div>
+    <div class="player__levels">
+      <div class="player__title">Level and awards</div>
+      <div class="player__level-items">
+        <my-progressbar class="player__level-item"
+                        v-for="item in user.games"
+                        :key="item.title"
+                        :title="item.title"
+                        :lvl="item.lvl" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  layout: 'profile',
+  async mounted() {
+    this.$fire.auth.onAuthStateChanged(async (user) => {
+      const usersRef = this.$fire.database.ref('users')
+      try {
+        const snapshot = await usersRef.once('value')
+        const users = snapshot.val()
+        Object.keys(users).forEach((userDB) => {
+          if(users[userDB].uid === user.uid) {
+            this.user = users[userDB]
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    })
+  },
+  data() {
+    return {
+      user: {}
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .player {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &__mobile {
+      display: none;
+    }
+    &__title {
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+    &__items {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    &__item {
+      span {
+        display: inline-block;
+        width: 115px;
+        margin-right: 60px;
+        color: #67707A;
+      }
+    }
+  }
+  .player__level-item + .player__level-item {
+    margin-top: 26px;
+  }
+  @media (max-width: 900px) {
+    .player__mobile {
+      display: flex;
+    }
+    .player {
+      &__img {
+        max-width: 120px;
+        max-height: 120px;
+        margin-right: 40px;
+        img {
+          border-radius: 4px;
+        }
+      }
+      &__name {
+        color: #909AA3;
+        margin-bottom: 5px;
+      }
+      &__username {
+        color: #F5F5F5;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 130%;
+        margin-bottom: 7px;
+      }
+      &__team {
+        color: #37B7FA;
+        line-height: 130%;
+        margin-bottom: 11px;
+      }
+      &__icons {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 66px;
+        margin-top: 11px;
+      }
+      &__icon {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
+    }
+    .player {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+</style>
