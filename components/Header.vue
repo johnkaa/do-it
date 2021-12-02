@@ -64,7 +64,7 @@
         <my-button>Sign Up</my-button>
       </nuxt-link>
     </div>
-    <div class="header__user" :class="{ active: userActive }" v-if="auth" @click="setUserActive">
+    <div class="header__user" :class="{ active: userActive }" v-if="auth" @mouseout="setUserActive" @mouseover="setUserActive">
       <div class="header__user-wrapper">
         <div class="header__user-img">
           <img :src="user.img" alt="">
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="header__user-links">
-          <nuxt-link class="header__user-link" to="/">My profile</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player">My profile</nuxt-link>
           <nuxt-link class="header__user-link" to="/">My team</nuxt-link>
           <nuxt-link class="header__user-link" to="/">Withdraw</nuxt-link>
           <nuxt-link class="header__user-link" to="/">Deposit</nuxt-link>
@@ -92,7 +92,7 @@
         <div class="header__user-links">
           <nuxt-link class="header__user-link" to="/support">Support</nuxt-link>
           <nuxt-link class="header__user-link" to="/">Settings</nuxt-link>
-          <nuxt-link class="header__user-link" to="/auth/login" @click="logout">Logout</nuxt-link>
+          <div class="header__user-link" @click="logout">Logout</div>
         </div>
       </div>
     </div>
@@ -100,24 +100,29 @@
 </template>
 
 <script>
+// import { mapGetters } from 'vuex'
+
 export default {
-  async mounted() {
-    if(this.$fire.auth.currentUser) {
-      this.auth = true
-      const usersRef = this.$fire.database.ref('users')
-      try {
-        const snapshot = await usersRef.once('value')
-        const users = snapshot.val()
-        Object.keys(users).forEach((user) => {
-          if(users[user].uid = this.$fire.auth.currentUser.uid) {
-            this.user = users[user]
-          }
-        })
-        this.lvlWidth = this.user.lvl + '%'
-      } catch (e) {
-        console.log(e)
+  // computed: mapGetters(['getUser']),
+  mounted() {
+    this.$fire.auth.onAuthStateChanged(async (user) => {
+      if(user) {
+        this.auth = true
+        const usersRef = this.$fire.database.ref('users')
+        try {
+          const snapshot = await usersRef.once('value')
+          const users = snapshot.val()
+          Object.keys(users).forEach((userDB) => {
+            if(users[userDB].uid === user.uid) {
+              this.user = users[userDB]
+            }
+          })
+          this.lvlWidth = this.user.lvl + '%'
+        } catch (e) {
+          console.log(e)
+        }
       }
-    }
+    })
   },
   data() {
     return {
@@ -134,8 +139,9 @@ export default {
     }
   },
   methods: {
-    logout() {
-      this.$fire.auth.signOut()
+    async logout() {
+      await this.$fire.auth.signOut()
+      await this.$router.push('/auth/login')
     },
     setBurgerActive() {
       this.burgerActive = !this.burgerActive
@@ -263,7 +269,7 @@ export default {
       width: calc(100% + 16px);
       position: absolute;
       left: -8px;
-      top: 40px;
+      top: 38px;
       display: none;
       z-index: 5;
       .header__user-link {
@@ -271,6 +277,7 @@ export default {
         position: relative;
         padding: 7px 7px 7px 12px;
         font-size: 12px;
+        cursor: pointer;
         &:hover {
           background-color: rgba(#fff, .1);
         }
@@ -287,7 +294,7 @@ export default {
       }
     }
     &-links + &-links {
-      top: 270px;
+      top: 267px;
       .header__user-link {
         color: #969BA3;
       }
