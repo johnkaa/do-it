@@ -1,6 +1,6 @@
 <template>
   <div class="datepicker" :class="{ active: active }">
-    <button class="datepicker__title" type="button" @click="setActive">{{ date || 'dd-mm-yyyy' }}</button>
+    <button class="datepicker__title" type="button" @click="setActive">{{ date || valueDate || 'dd-mm-yyyy' }}</button>
     <v-date-picker
       class="datepicker__calendar"
       locale="en"
@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  props: ['valueDate'],
   watch: {
     select() {
       let day = ''

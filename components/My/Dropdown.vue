@@ -69,7 +69,7 @@ export default {
       top: 45px;
       background-color: #0F1215;
       border: 1px solid #1472FF;
-      height: 232px;
+      max-height: 232px;
       width: 100%;
       overflow: auto;
       overflow-x: hidden;

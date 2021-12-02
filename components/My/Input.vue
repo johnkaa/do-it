@@ -6,13 +6,14 @@
            :placeholder="placeholder"
            v-model="field"
            @input="updateField"/>
+    <span class="input__value" v-if="!field && valueOfField">{{ valueOfField }}</span>
     <div v-if="fail" class="input__error">{{ errorMessage }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['type', 'placeholder', 'success', 'fail', 'errorMessage'],
+  props: ['type', 'placeholder', 'success', 'fail', 'errorMessage', 'valueOfField'],
   data() {
     return {
       field: ''
@@ -59,8 +60,15 @@ export default {
     }
   }
   .input__wrapper {
+    position: relative;
+    .input__value {
+      color: #627CA3;
+      position: absolute;
+      top: 12px;
+      left: 17px;
+      transform: translateY(-15%);
+    }
     &.success {
-      position: relative;
       .input {
         border-color: #4CB725;
       }
@@ -76,7 +84,6 @@ export default {
       }
     }
     &.fail {
-      position: relative;
       .input {
         border-color: #B83333;
       }
