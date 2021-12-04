@@ -45,7 +45,11 @@ export default {
         this.emailErrorMsg = 'Invalid email'
       }
       if(!this.$v.email.$invalid) {
-        this.$fire.auth.sendPasswordResetEmail(this.email)
+        try {
+          this.$fire.auth.sendPasswordResetEmail(this.email)
+        } catch (e) {
+          this.$toasted.error(e);
+        }
         this.$router.push('/auth/login')
       }
     },
