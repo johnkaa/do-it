@@ -97,4 +97,10 @@ export default {
       display: block;
     }
   }
+  .select.secondary {
+    .select__title {
+      color: #CCCDCD;
+      border: 2px solid #20252B;
+    }
+  }
 </style>
