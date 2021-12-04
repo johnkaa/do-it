@@ -21,7 +21,6 @@
       <filtered-slider title="News" :items="news" :news="true"/>
     </div>
     <div class="home__streams">
-      <h2>Streams</h2>
       <filtered-slider title="Streams" :streams="true"/>
 <!--      <div v-for="item in streams" :key="item">-->
 <!--        {{ item }}-->
@@ -48,12 +47,12 @@ export default {
   head: {
     title: 'Home'
   },
-  mounted() {
-    this.getUser()
-    this.getNews()
-    this.getStreams()
-    this.getPartners()
-    this.getGames()
+  async fetch() {
+    await this.getUser()
+    await this.getNews()
+    await this.getStreams()
+    await this.getPartners()
+    await this.getGames()
   },
   data() {
     return {

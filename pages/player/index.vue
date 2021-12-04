@@ -2,12 +2,12 @@
   <div class="player">
     <div class="player__mobile">
       <div class="player__img">
-        <img :src="user.img" alt="">
+        <img :src="getUser.img" alt="">
       </div>
       <div class="player__mobile-name">
-        <div class="player__name" v-if="user.name">{{ user.name }}</div>
-        <div class="player__username">{{ user.username }}</div>
-        <div class="player__team" v-if="user.mainTeam">{{ user.mainTeam }}</div>
+        <div class="player__name" v-if="getUser.name">{{ getUser.name }}</div>
+        <div class="player__username">{{ getUser.username }}</div>
+        <div class="player__team" v-if="getUser.mainTeam">{{ getUser.mainTeam }}</div>
         <div class="player__icons">
           <img class="player__icon" src="/images/icons/plus.svg" alt="">
           <img class="player__icon" src="/images/icons/mail.svg" alt="">
@@ -17,21 +17,21 @@
     <div class="player__info">
       <div class="player__title">Profile</div>
       <div class="player__items">
-        <div class="player__item"><span>ID</span>{{ user.id }}</div>
-        <div class="player__item" v-if="user.name"><span>Name</span>{{ user.name }}</div>
-        <div class="player__item"><span>Nickname</span>{{ user.username }}</div>
-        <div class="player__item"><span>With us from</span>{{ user.dateRegistration }}</div>
-        <div class="player__item" v-if="user.sex && user.age"><span>Sex / Age</span>{{ user.sex }} / {{ user.age }}</div>
-        <div class="player__item" v-if="user.nationality"><span>Nationality</span>{{ user.nationality }}</div>
-        <div class="player__item"><span>Country</span>{{ user.country }}</div>
-        <div class="player__item" v-if="user.website"><span>Web-site</span>{{ user.website }}</div>
+        <div class="player__item"><span>ID</span>{{ getUser.id }}</div>
+        <div class="player__item" v-if="getUser.name"><span>Name</span>{{ getUser.name }}</div>
+        <div class="player__item"><span>Nickname</span>{{ getUser.username }}</div>
+        <div class="player__item"><span>With us from</span>{{ getUser.dateRegistration }}</div>
+        <div class="player__item" v-if="getUser.sex && getUser.age"><span>Sex / Age</span>{{ getUser.sex }} / {{ getUser.age }}</div>
+        <div class="player__item" v-if="getUser.nationality"><span>Nationality</span>{{ getUser.nationality }}</div>
+        <div class="player__item"><span>Country</span>{{ getUser.country }}</div>
+        <div class="player__item" v-if="getUser.website"><span>Web-site</span>{{ getUser.website }}</div>
       </div>
     </div>
     <div class="player__levels">
       <div class="player__title">Level and awards</div>
       <div class="player__level-items">
         <my-progressbar class="player__level-item"
-                        v-for="item in user.games"
+                        v-for="item in getUser.games"
                         :key="item.title"
                         :title="item.title"
                         :lvl="item.lvl" />
@@ -41,29 +41,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   layout: 'profile',
-  async mounted() {
-    this.$fire.auth.onAuthStateChanged(async (user) => {
-      const usersRef = this.$fire.database.ref('users')
-      try {
-        const snapshot = await usersRef.once('value')
-        const users = snapshot.val()
-        Object.keys(users).forEach((userDB) => {
-          if(users[userDB].uid === user.uid) {
-            this.user = users[userDB]
-          }
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    })
-  },
-  data() {
-    return {
-      user: {}
-    }
-  }
+  computed: mapGetters(['getUser']),
 }
 </script>
 

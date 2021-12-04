@@ -25,13 +25,13 @@ export default {
   head: {
     title: 'News'
   },
-  async mounted() {
+  async fetch() {
     const newsRef = this.$fire.database.ref('news')
     try {
       const snapshot = await newsRef.once('value')
       this.news = snapshot.val()
     } catch (e) {
-      console.log(e)
+      this.$toasted.error(e)
     }
   },
   data() {

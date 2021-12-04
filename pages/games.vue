@@ -19,13 +19,13 @@ export default {
   head: {
     title: 'Games'
   },
-  async mounted() {
+  async fetch() {
     const gamesRef = this.$fire.database.ref('games')
     try {
       const snapshot = await gamesRef.once('value')
       this.games = snapshot.val()
     } catch (e) {
-      console.log(e)
+      this.$toasted.error(e)
     }
   },
   computed: {
