@@ -25,12 +25,12 @@
         <li class="menu__list-item">
           <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>
         </li>
-        <li class="menu__list-item" v-if="!this.$fire.auth.currentUser">
+        <li class="menu__list-item" v-if="!$fire.auth.currentUser">
           <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/login">
             <my-button class="secondary">Login</my-button>
           </nuxt-link>
         </li>
-        <li class="menu__list-item" v-if="!this.$fire.auth.currentUser">
+        <li class="menu__list-item" v-if="!$fire.auth.currentUser">
           <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/register">
             <my-button>Sign Up</my-button>
           </nuxt-link>
@@ -56,7 +56,7 @@
         </li>
       </ul>
     </nav>
-    <div class="header__btns" v-if="!auth">
+    <div class="header__btns" v-if="!$fire.auth.currentUser">
       <nuxt-link class="header__btn" to="/auth/login">
         <my-button class="secondary">Login</my-button>
       </nuxt-link>
@@ -64,34 +64,34 @@
         <my-button>Sign Up</my-button>
       </nuxt-link>
     </div>
-    <div class="header__user" :class="{ active: userActive }" v-if="auth" @mouseout="setUserActive" @mouseover="setUserActive">
+    <div class="header__user" :class="{ active: userActive }" v-if="$fire.auth.currentUser" @mouseout="setUserActive" @mouseover="setUserActive">
       <div class="header__user-wrapper">
         <div class="header__user-img">
-          <img :src="user.img" alt="">
+          <img :src="getUser.img" alt="">
         </div>
         <div class="header__user-info">
-          <div class="header__user-name">{{ user.username }}</div>
-          <div class="header__user-balance">{{ user.balance.eur }} EUR / {{ user.balance.dtc }} DTC</div>
+          <div class="header__user-name">{{ getUser.username }}</div>
+          <div class="header__user-balance">{{ getUser.eur }} EUR / {{ getUser.dtc }} DTC</div>
         </div>
       </div>
       <div class="header__user-inner">
         <div class="header__user-lvl">
-          <span class="header__user-lvl-text">LVL {{ user.lvl }}</span>
+          <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>
           <div class="header__user-lvl-bar">
-            <span :style="{ width: lvlWidth }"></span>
+            <span :style="{ getUser: lvlWidth }"></span>
           </div>
         </div>
         <div class="header__user-links">
           <nuxt-link class="header__user-link" to="/player">My profile</nuxt-link>
           <nuxt-link class="header__user-link" to="/">My team</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">Withdraw</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">Deposit</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">Premium</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/balance/withdraw">Withdraw</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/balance/deposit">Deposit</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/subscribe">Premium</nuxt-link>
           <nuxt-link class="header__user-link" to="/">Statistics</nuxt-link>
         </div>
         <div class="header__user-links">
-          <nuxt-link class="header__user-link" to="/support">Support</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">Settings</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/support">Support</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/settings">Settings</nuxt-link>
           <div class="header__user-link" @click="logout">Logout</div>
         </div>
       </div>
@@ -100,41 +100,14 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  // computed: mapGetters(['getUser']),
-  mounted() {
-    this.$fire.auth.onAuthStateChanged(async (user) => {
-      if(user) {
-        this.auth = true
-        const usersRef = this.$fire.database.ref('users')
-        try {
-          const snapshot = await usersRef.once('value')
-          const users = snapshot.val()
-          Object.keys(users).forEach((userDB) => {
-            if(users[userDB].uid === user.uid) {
-              this.user = users[userDB]
-            }
-          })
-          this.lvlWidth = this.user.lvl + '%'
-        } catch (e) {
-          console.log(e)
-        }
-      }
-    })
-  },
+  computed: mapGetters(['getUser']),
   data() {
     return {
       burgerActive: false,
       userActive: false,
-      auth: false,
-      user: {
-        balance: {
-          eur: 0,
-          dtc: 0
-        }
-      },
       lvlWidth: ''
     }
   },

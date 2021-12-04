@@ -9,16 +9,16 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   mounted() {
-    //this.$fireSt// e.g. in a seperate Plugin
-    // this.$fireAuthStore.subscribe()
-    // this.onAuthStateChangedAction
+    if(this.$fire.auth.currentUser) {
+      this.setUser(this.$fire.auth.currentUser.uid)
+    }
   },
   methods: {
-    // ...mapActions(['onAuthStateChangedAction'])
+    ...mapMutations(['setUser']),
   }
 }
 </script>

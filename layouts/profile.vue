@@ -6,20 +6,23 @@
       <div class="profile-layout">
         <div class="player__sidebar">
           <div class="player__img">
-            <img :src="user.img" alt="">
+            <img :src="getUser.img" alt="">
           </div>
-          <div class="player__name" v-if="user.name">{{ user.name }}</div>
-          <div class="player__username">{{ user.username }}</div>
-          <div class="player__team" v-if="user.mainTeam">{{ user.mainTeam }}</div>
+          <div class="player__name" v-if="getUser.name">{{ getUser.name }}</div>
+          <div class="player__username">{{ getUser.username }}</div>
+          <div class="player__team" v-if="getUser.mainTeam">{{ getUser.mainTeam }}</div>
+          <div class="player__team">BALANCE: ${{ getUser.eur }}</div>
           <div class="player__icons">
             <img class="player__icon" src="/images/icons/plus.svg" alt="">
             <img class="player__icon" src="/images/icons/mail.svg" alt="">
           </div>
           <div class="player__nav">
             <nuxt-link class="player__nav-item" :class="{ 'active' : this.$route.path === '/player' }" to="/player">Profile</nuxt-link>
+            <nuxt-link class="player__nav-item" to="/player/user-panel">User panel</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/edit-account-details">Edit account details</nuxt-link>
-            <nuxt-link class="player__nav-item" to="/player/543">About me</nuxt-link>
-            <nuxt-link class="player__nav-item" to="/">Number four</nuxt-link>
+            <nuxt-link class="player__nav-item" to="/player/balance/deposit">Deposit</nuxt-link>
+            <nuxt-link class="player__nav-item" to="/player/subscribe">Subscribe</nuxt-link>
+            <nuxt-link class="player__nav-item" to="/player/settings">Settings</nuxt-link>
           </div>
         </div>
         <Nuxt class="player"/>
@@ -29,30 +32,18 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   head: {
     title: 'Profile'
   },
-  async mounted() {
-    this.$fire.auth.onAuthStateChanged(async (user) => {
-      const usersRef = this.$fire.database.ref('users')
-      try {
-        const snapshot = await usersRef.once('value')
-        const users = snapshot.val()
-        Object.keys(users).forEach((userDB) => {
-          if(users[userDB].uid === user.uid) {
-            this.user = users[userDB]
-          }
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    })
+  computed: mapGetters(['getUser']),
+  mounted() {
+    this.setUser(this.$fire.auth.currentUser.uid)
   },
-  data() {
-    return {
-      user: {}
-    }
+  methods: {
+    ...mapMutations(['setUser']),
   }
 }
 </script>
