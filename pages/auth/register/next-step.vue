@@ -114,6 +114,11 @@ export default {
             dateRegistration: this.dateRegistration,
             img: 'https://i.pinimg.com/736x/df/72/d5/df72d51685e99a265ad186bada408e27.jpg',
             lvl: 0,
+            gameProfile: {
+              battlenet: '',
+              riot: '',
+              steam: ''
+            },
             eur: 0,
             dtc: 0,
             subscribe: 'free'
