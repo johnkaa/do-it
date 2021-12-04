@@ -4,11 +4,11 @@
     <form class="edit-account__items" @submit.prevent="submit">
       <div class="edit-account__item">
         <p class="edit-account__item-title">Username</p>
-        <my-input @updateField="updateUsername" :fail="$v.username.$error" errorMessage="Username must be at least 3 characters" :valueOfField="username"/>
+        <my-input @updateField="updateUsername" :fail="$v.username.$error" errorMessage="Username must be at least 3 characters" :field="username"/>
       </div>
       <div class="edit-account__item">
         <p class="edit-account__item-title">Name</p>
-        <my-input @updateField="updateName" :valueOfField="name"/>
+        <my-input @updateField="updateName" :field="name"/>
       </div>
       <div class="edit-account__item">
         <p class="edit-account__item-title">Country</p>
