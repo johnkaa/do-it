@@ -81,9 +81,14 @@ export default {
           await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
             .then(() => {
               this.$router.push('/')
+              this.$toasted.success('You are logged in!');
             })
         } catch (e) {
-          console.log(e)
+          if(e.toString().includes('(auth/user-not-found)')) {
+            this.$toasted.error('User not found');
+          } else if(e.toString().includes('(auth/wrong-password)')) {
+            this.$toasted.error('Wrong password');
+          }
         }
       }
     },

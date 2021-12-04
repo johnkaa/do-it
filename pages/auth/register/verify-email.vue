@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { getAuth, sendEmailVerification } from "firebase/auth";
+
 export default {
   layout: 'auth',
   data() {
@@ -24,6 +26,8 @@ export default {
   },
   methods: {
     async submit() {
+      const auth = getAuth()
+      sendEmailVerification(auth.currentUser)
       const usersRef = this.$fire.database.ref('users')
       try {
         const snapshot = await usersRef.once('value')
@@ -36,8 +40,9 @@ export default {
         const userEmailVerifyRef = this.$fire.database.ref(`users/${this.id}/emailVerified`)
         await userEmailVerifyRef.set(true)
         this.$router.push('/')
+        this.$toasted.success('Success')
       } catch (e) {
-        console.log(e)
+        this.$toasted.error(e)
       }
     },
   }

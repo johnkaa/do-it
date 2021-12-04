@@ -114,14 +114,12 @@ export default {
             dateRegistration: this.dateRegistration,
             img: 'https://i.pinimg.com/736x/df/72/d5/df72d51685e99a265ad186bada408e27.jpg',
             lvl: 0,
-            balance: {
-              eur: 0,
-              dtc: 0
-            },
+            eur: 0,
+            dtc: 0,
             subscribe: 'free'
           })
         } catch (e) {
-          console.log(e)
+          this.$toasted.error(e)
         }
         this.$router.push({
           path: '/auth/register/verify-email',
@@ -129,6 +127,7 @@ export default {
             uid: this.uid
           }
         })
+        this.$toasted.success('Success')
       }
     },
     getDateNow() {

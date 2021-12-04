@@ -82,6 +82,7 @@ export default {
             password: this.password,
           }
         })
+        this.$toasted.success('Success')
       }
     },
     updateEmail(field) {

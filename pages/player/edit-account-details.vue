@@ -34,11 +34,13 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators"
-import { getNames } from "country-list"
+import { required, minLength } from 'vuelidate/lib/validators'
+import { getNames } from 'country-list'
+import { mapGetters } from 'vuex'
 
 export default {
   layout: 'profile',
+  computed: mapGetters(['getUser']),
   async mounted() {
     this.countries = getNames()
     await this.getUserData()
@@ -100,33 +102,21 @@ export default {
             await sexRef.set(this.sex)
           }
         } catch (e) {
-          console.log(e)
+          this.$toasted.error(e)
         }
+        this.$toasted.success('Success')
         this.$router.push({
           path: '/player',
         })
       }
     },
     async getUserData() {
-      this.$fire.auth.onAuthStateChanged(async (user) => {
-        const usersRef = this.$fire.database.ref('users')
-        try {
-          const snapshot = await usersRef.once('value')
-          const users = snapshot.val()
-          Object.keys(users).forEach((userDB) => {
-            if(users[userDB].uid === user.uid) {
-              this.id = users[userDB].id
-              this.username = users[userDB].username
-              this.name = users[userDB].name
-              this.country = users[userDB].country
-              this.sex = users[userDB].sex
-              this.dateOfBirth = users[userDB].dateOfBirth
-            }
-          })
-        } catch (e) {
-          console.log(e)
-        }
-      })
+      this.id = this.getUser.id
+      this.username = this.getUser.username
+      this.name = this.getUser.name
+      this.country = this.getUser.country
+      this.sex = this.getUser.sex
+      this.dateOfBirth = this.getUser.dateOfBirth
     },
     getAge() {
       const now = new Date() //Текущя дата

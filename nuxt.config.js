@@ -9,7 +9,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'shortcut icon', type: 'image/png', href: 'static/images/logo.png' }
+      { rel: 'shortcut icon', type: 'image/png', href: '/images/logo.png' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: true },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap' },
     ]
   },
 
@@ -24,6 +27,7 @@ export default {
     { src: '~plugins/swiper', mode: 'client' },
     { src: '~plugins/vuelidate', mode: 'client' },
     { src: '~plugins/v-calendar', mode: 'client' },
+    { src: '~plugins/toast', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -80,7 +84,13 @@ export default {
       lang: 'en'
     },
     icon: {
-      source: 'static/images/logo.png'
+      source: '/images/logo.png'
+    },
+    workbox: {
+      importScripts: [
+        '/firebase-auth-sw.js'
+      ],
+      dev: process.env.NODE_ENV === 'development',
     }
   },
 
