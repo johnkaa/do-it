@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
   .news-card {
-    max-width: 273px;
+    max-width: 271px;
     background-color: #20252B;
     width: 100%;
     &__img {
@@ -51,7 +51,7 @@ export default {
   .news-card.bigSize {
     padding-left: 208px;
     position: relative;
-    max-width: 570px;
+    max-width: 568px;
     height: 328px;
     width: 100%;
     overflow: hidden;

@@ -81,7 +81,7 @@ export default {
       row-gap: 15px;
     }
     &__item {
-      max-width: 350px;
+      max-width: 349px;
       max-height: 500px;
       height: 100%;
       width: 100%;
