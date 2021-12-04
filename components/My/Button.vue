@@ -16,6 +16,7 @@ export default {
   .button {
     color: white;
     background: $primary-gradient;
+    font-family: 'Rubik', sans-serif;
     font-weight: 700;
     line-height: 19px;
     padding: 12px 30px;

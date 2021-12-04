@@ -99,4 +99,17 @@ export default {
       }
     }
   }
+  .input__wrapper.secondary {
+    background: #0F1215;
+    .input {
+      border: 2px solid #20252B;
+      &::placeholder {
+        color: #CCCDCD;
+      }
+      &:focus {
+        border-color: lighten(#20252B, 10%);
+        background-color: lighten(#0F1215, 2%);
+      }
+    }
+  }
 </style>
