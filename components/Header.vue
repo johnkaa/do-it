@@ -82,8 +82,9 @@
           </div>
         </div>
         <div class="header__user-links">
+          <nuxt-link class="header__user-link" v-if="getUser.id === 16381161807" to="/admin/tournaments">Admin</nuxt-link>
           <nuxt-link class="header__user-link" to="/player">My profile</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">My team</nuxt-link>
+          <nuxt-link class="header__user-link" to="/player/team">My team</nuxt-link>
           <nuxt-link class="header__user-link" to="/player/balance/withdraw">Withdraw</nuxt-link>
           <nuxt-link class="header__user-link" to="/player/balance/deposit">Deposit</nuxt-link>
           <nuxt-link class="header__user-link" to="/player/subscribe">Premium</nuxt-link>
