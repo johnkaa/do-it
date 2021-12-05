@@ -20,6 +20,7 @@
             <nuxt-link class="player__nav-item" :class="{ 'active' : this.$route.path === '/player' }" to="/player">Profile</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/user-panel">User panel</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/edit-account-details">Edit account details</nuxt-link>
+            <nuxt-link class="player__nav-item" to="/player/team">My team</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/balance/deposit">Deposit</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/subscribe">Subscribe</nuxt-link>
             <nuxt-link class="player__nav-item" to="/player/settings">Settings</nuxt-link>
