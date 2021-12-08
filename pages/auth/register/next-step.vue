@@ -121,7 +121,8 @@ export default {
             },
             eur: 0,
             dtc: 0,
-            subscribe: 'free'
+            subscribe: 'free',
+            rank: 'user'
           })
         } catch (e) {
           this.$toasted.error(e)
