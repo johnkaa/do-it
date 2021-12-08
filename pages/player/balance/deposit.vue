@@ -46,6 +46,7 @@ export default {
         month = '0' + (new Date().getMonth() + 1)
       }
       const dateNow = day + '.' + month + '.' + new Date().getFullYear() + ' ' + new Date().getHours() + ':' + new Date().getMinutes()
+      const dateWithoutTime = day + '/' + month + '/' + new Date().getFullYear()
       try {
         const userBalanceRef = this.$fire.database.ref(`users/${this.getUser.id}/eur`)
         const userHistoryRef = this.$fire.database.ref(`users/${this.getUser.id}/balanceHistory/${(+new Date()-(+new Date()%100)) / 100}`)
@@ -61,6 +62,16 @@ export default {
           const userBalanceDTCRef = this.$fire.database.ref(`users/${this.getUser.id}/dtc`)
           await userBalanceDTCRef.set(this.getUser.dtc - (this.amount * 10))
         }
+        const paymentsHistoryRef = this.$fire.database.ref(`payments/${(+new Date()-(+new Date()%100)) / 100}`)
+        await paymentsHistoryRef.set({
+          date: dateWithoutTime,
+          username: this.getUser.username,
+          eur: this.getUser.eur,
+          dtc: this.getUser.dtc,
+          type: 'Withdraw',
+          method: this.method,
+          amount: `$${this.amount}`
+        })
         this.$toasted.success('Success')
       } catch (e) {
         this.$toasted.error(e)
