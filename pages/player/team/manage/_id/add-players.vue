@@ -40,6 +40,7 @@ export default {
             }
           } else {
             this.$toasted.error('Players not found')
+            this.$router.go(-1)
           }
         }
       })
