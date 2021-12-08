@@ -1,24 +1,30 @@
 <template>
   <div class="file-input">
-    <div class="file-input__name">{{ filename || name }}</div>
-    <div class="file-input__btn" @click.prevent="onPickFile">UPLOAD</div>
-    <input
-      type="file"
-      style="display: none;"
-      ref="fileInput"
-      accept="image/*"
-      @change="onFilePicked"
-    >
+    <div class="file-input__inner">
+      <div class="file-input__name">{{ filename.substr(0, 30) || name }}</div>
+      <div class="file-input__btn" @click.prevent="onPickFile">UPLOAD</div>
+      <input
+        type="file"
+        style="display: none;"
+        ref="fileInput"
+        accept="image/*"
+        @change="onFilePicked"
+      >
+    </div>
+    <div class="file-input__preview">
+      <img :src="loading || img || fileurl || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'" alt="">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['name', 'path'],
+  props: ['name', 'path', 'img'],
   data() {
     return {
       filename: '',
       fileurl: '',
+      loading: '',
       file: null
     }
   },
@@ -39,11 +45,13 @@ export default {
       }
       fileReader.readAsDataURL(files[0])
       try {
+        this.loading = 'https://i.pinimg.com/originals/4f/43/2d/4f432d9234988a5f33b26e0ba06bc6fe.gif'
         const snapshot = await this.$fire.storage
           .ref()
           .child(this.path)
           .put(this.file)
         this.$emit('uploadFile', await snapshot.ref.getDownloadURL())
+        this.loading = ''
         this.$toasted.success('File uploaded')
       } catch (e) {
         this.$toast.error(e)
@@ -55,8 +63,10 @@ export default {
 
 <style lang="scss" scoped>
   .file-input {
-    display: flex;
-    justify-content: space-between;
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+    }
     &__name {
       border: 2px solid #20252B;
       border-radius: 4px;
@@ -75,6 +85,10 @@ export default {
       font-weight: 700;
       padding: 16px 0;
       cursor: pointer;
+    }
+    &__preview {
+      margin-top: 5px;
+      max-width: 108px;
     }
   }
 </style>

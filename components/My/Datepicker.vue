@@ -78,6 +78,12 @@ export default {
       z-index: 1;
     }
   }
+  .datepicker.secondary {
+    .datepicker__title {
+      color: #CCCDCD;
+      border: 1px solid #20252B;
+    }
+  }
   .datepicker.active .datepicker__calendar {
     display: block;
   }

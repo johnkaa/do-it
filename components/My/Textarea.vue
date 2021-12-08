@@ -7,12 +7,7 @@
 
 <script>
 export default {
-  props: ['placeholder'],
-  data() {
-    return {
-      field: ''
-    }
-  },
+  props: ['placeholder', 'field'],
   methods: {
     updateField() {
       this.$emit('updateField', this.field)

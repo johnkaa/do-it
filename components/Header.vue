@@ -78,7 +78,7 @@
         <div class="header__user-lvl">
           <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>
           <div class="header__user-lvl-bar">
-            <span :style="{ getUser: lvlWidth }"></span>
+            <span :style="{ width: getUser.lvl + '%' }"></span>
           </div>
         </div>
         <div class="header__user-links">
@@ -109,7 +109,6 @@ export default {
     return {
       burgerActive: false,
       userActive: false,
-      lvlWidth: ''
     }
   },
   methods: {
@@ -230,7 +229,6 @@ export default {
         border-radius: 2px;
         position: relative;
         span {
-          width: 20%;
           height: 2px;
           background-color: #fff;
           position: absolute;
