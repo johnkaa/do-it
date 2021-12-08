@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   head: {
@@ -41,11 +41,8 @@ export default {
   },
   computed: mapGetters(['getUser']),
   mounted() {
-    this.setUser(this.$fire.auth.currentUser.uid)
+    this.$store.dispatch('setUserAction', this.$fire.auth.currentUser.uid)
   },
-  methods: {
-    ...mapMutations(['setUser']),
-  }
 }
 </script>
 

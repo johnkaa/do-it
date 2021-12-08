@@ -9,17 +9,13 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 
 export default {
   mounted() {
     if(this.$fire.auth.currentUser) {
-      this.setUser(this.$fire.auth.currentUser.uid)
+      this.$store.dispatch('setUserAction', this.$fire.auth.currentUser.uid)
     }
   },
-  methods: {
-    ...mapMutations(['setUser']),
-  }
 }
 </script>
 
