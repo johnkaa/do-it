@@ -75,7 +75,8 @@ export default {
       country: '',
       website: '',
       img: '',
-      players: {}
+      players: {},
+      dateRegistration: ''
     }
   },
   methods: {
@@ -84,6 +85,7 @@ export default {
         !this.country && !this.website && !this.img) {
         return this.$toasted.error('All fields are required!')
       }
+      this.getDateNow()
       const teamsRef = await this.$fire.database.ref(`teams/${this.id}`)
       try {
         await teamsRef.set({
@@ -95,7 +97,8 @@ export default {
           country: this.country,
           website: this.website,
           img: this.img,
-          players: this.players
+          players: this.players,
+          dateRegistration: this.dateRegistration,
         })
       } catch (e) {
         return this.$toasted.error(e)
@@ -110,6 +113,20 @@ export default {
         return this.$toasted.error(e)
       }
       this.$toasted.success('Success')
+    },
+    getDateNow() {
+      const dateObj = new Date()
+      let date = dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      if(dateObj.getDate() < 10) {
+        date = '0' + dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      if((dateObj.getMonth() + 1) < 10) {
+        date = dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      if(dateObj.getDate() < 10 && (dateObj.getMonth() + 1) < 10) {
+        date = '0' + dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      }
+      this.dateRegistration = date
     },
     updateName(field) {
       this.name = field
@@ -129,7 +146,7 @@ export default {
     updateWebsite(field) {
       this.website = field
     },
-    async uploadImg(img) {
+    uploadImg(img) {
       this.img = img
     }
   }
@@ -137,41 +154,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.create-team {
-  width: 100%;
-  padding-bottom: 100px;
-  &__title {
-    text-align: center;
-    margin-bottom: 30px;
+  .create-team {
+    width: 100%;
+    padding-bottom: 100px;
+    &__title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    &__form {
+      color: #CCCDCD;
+      max-width: 620px;
+      margin: 0 auto;
+      &-inner {
+        padding: 44px 60px;
+        border: 1px solid #20252B;
+        margin-bottom: 33px;
+      }
+      &-title {
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      &-input {
+        margin-bottom: 22px;
+      }
+      &-dropdown {
+        margin-bottom: 22px;
+      }
+      &-btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 34px;
+      }
+      &-btn {
+        max-width: 160px;
+      }
+    }
   }
-  &__form {
-    color: #CCCDCD;
-    max-width: 620px;
-    margin: 0 auto;
-    &-inner {
-      padding: 44px 60px;
-      border: 1px solid #20252B;
-      margin-bottom: 33px;
-    }
-    &-title {
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    &-input {
-      margin-bottom: 22px;
-    }
-    &-dropdown {
-      margin-bottom: 22px;
-    }
-    &-btns {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 34px;
-    }
-    &-btn {
-      max-width: 160px;
-    }
-  }
-}
 </style>

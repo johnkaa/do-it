@@ -44,7 +44,7 @@
       <div class="edit-team__form-inner">
         <div class="edit-team__form-title">Advance info</div>
         <p class="edit-team__form-text">Logo 128x128</p>
-        <my-file-input name="logo url" :path="`teams/${this.id}/logo`" @uploadFile="uploadImg"/>
+        <my-file-input name="logo url" :path="`teams/${this.id}/logo`" :img="this.img" @uploadFile="uploadImg"/>
       </div>
       <div class="edit-team__form-btns">
         <nuxt-link :to="`/player/team/manage/${this.id}`"><my-button class="edit-team__form-btn secondary">Back</my-button></nuxt-link>
