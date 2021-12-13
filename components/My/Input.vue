@@ -3,6 +3,7 @@
        :class="{ success: success, fail: fail }">
     <input class="input fail"
            :type="type"
+           min="0"
            :placeholder="placeholder"
            v-model="field"
            @input="updateField"/>
@@ -12,9 +13,12 @@
 
 <script>
 export default {
-  props: ['type', 'placeholder', 'success', 'fail', 'errorMessage', 'field'],
+  props: ['type', 'placeholder', 'success', 'fail', 'errorMessage', 'field', 'index'],
   methods: {
     updateField() {
+      if(this.index !== undefined) {
+        return this.$emit('updateField', this.field, this.index)
+      }
       this.$emit('updateField', this.field)
     }
   }

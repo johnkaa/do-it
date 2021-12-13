@@ -11,7 +11,7 @@
         @change="onFilePicked"
       >
     </div>
-    <div class="file-input__preview">
+    <div class="file-input__preview" v-if="!disablePreview">
       <img :src="loading || img || fileurl || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'" alt="">
     </div>
   </div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['name', 'path', 'img'],
+  props: ['name', 'path', 'img', 'index', 'disablePreview'],
   data() {
     return {
       filename: '',
@@ -50,7 +50,11 @@ export default {
           .ref()
           .child(this.path)
           .put(this.file)
-        this.$emit('uploadFile', await snapshot.ref.getDownloadURL())
+        if(this.index !== undefined) {
+          this.$emit('uploadFile', await snapshot.ref.getDownloadURL(), this.index)
+        } else {
+          this.$emit('uploadFile', await snapshot.ref.getDownloadURL())
+        }
         this.loading = ''
         this.$toasted.success('File uploaded')
       } catch (e) {

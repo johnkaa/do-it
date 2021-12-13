@@ -2,7 +2,7 @@
   <div class="news-card" :class="{ mainPage: mainPage, bigSize: bigSize }">
     <img class="news-card__img" :src="img" alt="" />
     <div class="news-card__title">{{ title }}</div>
-    <div class="news-card__text">{{ description }}</div>
+    <div class="news-card__text">{{ text }}</div>
   </div>
 </template>
 
@@ -10,18 +10,15 @@
 export default {
   props: ['mainPage', 'bigSize', 'img', 'title', 'text'],
   mounted() {
+    if(!this.mainPage) {
+      this.text = this.text.substring(0, 120) + '...'
+    }
     if(this.mainPage) {
-      if(this.text.left > 50) {
-        this.text.substr(0,50)
-        this.description = this.text + '...'
+      if(this.text.length > 100) {
+        this.text = this.text.substring(0, 150) + '...'
       }
     }
   },
-  data() {
-    return {
-      description: this.text
-    }
-  }
 }
 </script>
 
@@ -76,7 +73,10 @@ export default {
   .news-card.mainPage {
     background-color: #E1E6EB;
     border: 2px solid #E1E6EB;
-    min-width: 370px;
+    min-width: 360px;
+    min-height: 457px;
+    max-height: 457px;
+    overflow: hidden;
     .news-card {
       &__img {
         width: 100%;
