@@ -50,7 +50,6 @@ export default {
       try {
         const userBalanceRef = this.$fire.database.ref(`users/${this.getUser.id}/eur`)
         const userHistoryRef = this.$fire.database.ref(`users/${this.getUser.id}/balanceHistory/${(+new Date()-(+new Date()%100)) / 100}`)
-        await userBalanceRef.set(this.getUser.eur + this.amount)
         await userHistoryRef.set({
           date: dateNow,
           name: this.name,
@@ -61,6 +60,9 @@ export default {
         if(this.method === 'DOIT') {
           const userBalanceDTCRef = this.$fire.database.ref(`users/${this.getUser.id}/dtc`)
           await userBalanceDTCRef.set(this.getUser.dtc - (this.amount * 10))
+          await userBalanceRef.set(this.getUser.eur + this.amount * 10)
+        } else {
+          await userBalanceRef.set(this.getUser.eur + this.amount)
         }
         const paymentsHistoryRef = this.$fire.database.ref(`payments/${(+new Date()-(+new Date()%100)) / 100}`)
         await paymentsHistoryRef.set({
@@ -68,11 +70,13 @@ export default {
           username: this.getUser.username,
           eur: this.getUser.eur,
           dtc: this.getUser.dtc,
-          type: 'Withdraw',
+          type: 'Deposit',
           method: this.method,
-          amount: `$${this.amount}`
+          deposit: `$${this.amount}`,
+          withdraw: '$0',
+          amount: `$${this.amount}`,
         })
-        this.$toasted.success('Success')
+        this.$toasted.success('The deposit was successful')
       } catch (e) {
         this.$toasted.error(e)
       }

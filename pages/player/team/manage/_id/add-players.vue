@@ -79,7 +79,7 @@ export default {
         this.$toasted.error(e)
       }
       this.teamPlayers.push(username)
-      this.$toasted.success('Success')
+      this.$toasted.success(`${username} has been added to team`)
     },
   }
 }

@@ -41,7 +41,7 @@ export default {
       } catch (e) {
         this.$toasted.error(e)
       }
-      this.$toasted.success('Success')
+      this.$toasted.success('Game profile has been changed')
     },
     updateRiot(field) {
       this.riot = field

@@ -104,7 +104,7 @@ export default {
         } catch (e) {
           this.$toasted.error(e)
         }
-        this.$toasted.success('Success')
+        this.$toasted.success('Account details has been changed')
         this.$router.push({
           path: '/player',
         })

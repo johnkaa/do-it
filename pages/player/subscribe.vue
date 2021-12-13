@@ -42,7 +42,7 @@
       ...mapMutations(['setUser']),
       async submit(type) {
         if(this.getUser.subscribe === type) {
-          return this.$toasted.error('You already have this subscribe')
+          return this.$toasted.error(`You already have ${type[0].toUpperCase()}${type.slice(1)} subscribe`)
         }
         try {
           const userBalanceRef = this.$fire.database.ref(`users/${this.getUser.id}/eur`)
@@ -50,7 +50,6 @@
           switch(type) {
             case 'free':
               await userSubscribeRef.set(type)
-              this.$toasted.success('Success')
               break
             case 'pro':
               if(this.getUser.eur < 5) {
@@ -58,7 +57,6 @@
               }
               await userBalanceRef.set(this.getUser.eur - 5)
               await userSubscribeRef.set(type)
-              this.$toasted.success('Success')
               break
             case 'organizer':
               if(this.getUser.eur < 10) {
@@ -66,12 +64,12 @@
               }
               await userBalanceRef.set(this.getUser.eur - 10)
               await userSubscribeRef.set(type)
-              this.$toasted.success('Success')
               break
           }
         } catch (e) {
-          this.$toasted.error(e)
+          return this.$toasted.error(e)
         }
+        this.$toasted.success(`Now you have ${type[0].toUpperCase()}${type.slice(1)} subscribe`)
       }
     }
   }

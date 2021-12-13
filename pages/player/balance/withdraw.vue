@@ -38,6 +38,11 @@ export default {
       if(this.getUser.eur < this.amount) {
         return this.$toasted.error("You don't have enough funds")
       }
+      if(this.method === 'DOIT') {
+        if(this.getUser.eur < this.amount * 10) {
+          return this.$toasted.error("You don't have enough funds")
+        }
+      }
       let day = new Date().getDate()
       let month = new Date().getMonth() + 1
       if(new Date().getDate() < 10) {
@@ -51,7 +56,6 @@ export default {
       try {
         const userBalanceRef = this.$fire.database.ref(`users/${this.getUser.id}/eur`)
         const userHistoryRef = this.$fire.database.ref(`users/${this.getUser.id}/balanceHistory/${(+new Date()-(+new Date()%100)) / 100}`)
-        await userBalanceRef.set(this.getUser.eur - this.amount)
         await userHistoryRef.set({
           date: dateNow,
           name: this.name,
@@ -63,6 +67,9 @@ export default {
         if(this.method === 'DOIT') {
           const userBalanceDTCRef = this.$fire.database.ref(`users/${this.getUser.id}/dtc`)
           await userBalanceDTCRef.set(this.getUser.dtc + (this.amount * 10))
+          await userBalanceRef.set(this.getUser.eur - this.amount * 10)
+        } else {
+          await userBalanceRef.set(this.getUser.eur - this.amount)
         }
         const paymentsHistoryRef = this.$fire.database.ref(`payments/${(+new Date()-(+new Date()%100)) / 100}`)
         await paymentsHistoryRef.set({
@@ -72,9 +79,11 @@ export default {
             dtc: this.getUser.dtc,
             type: 'Withdraw',
             method: this.method,
+            withdraw: `$${this.amount}`,
+            deposit: '$0',
             amount: `$${this.amount}`
         })
-        this.$toasted.success('Success')
+        this.$toasted.success('Withdrawal was successful')
       } catch (e) {
         this.$toasted.error(e)
       }

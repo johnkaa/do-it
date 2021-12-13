@@ -47,7 +47,9 @@
         <my-file-input name="logo url" :path="`teams/${this.id}/logo`" :img="this.img" @uploadFile="uploadImg"/>
       </div>
       <div class="edit-team__form-btns">
-        <nuxt-link :to="`/player/team/manage/${this.id}`"><my-button class="edit-team__form-btn secondary">Back</my-button></nuxt-link>
+        <div class="edit-team__form-btn" @click="deleteTeam">
+          <my-button class="edit-team__form-btn secondary" type="button" >Delete Team</my-button>
+        </div>
         <my-button class="edit-team__form-btn secondary">Save Team</my-button>
       </div>
     </form>
@@ -83,6 +85,7 @@ export default {
       this.country = team.country
       this.website = team.website
       this.img = team.img
+      this.date = team.creationDate
       this.players = team.players
     } catch (e) {
       this.$toasted.error(e)
@@ -106,7 +109,8 @@ export default {
       img: '',
       players: '',
       updatedPlayers: '',
-      listType: false
+      listType: false,
+      date: ''
     }
   },
   methods: {
@@ -127,6 +131,7 @@ export default {
           website: this.website,
           img: this.img,
           players: this.players,
+          creationDate: this.date
         })
       } catch (e) {
         this.$toasted.error(e)
@@ -140,7 +145,24 @@ export default {
       } catch (e) {
         this.$toasted.error(e)
       }
-      this.$toasted.success('Success')
+      this.$toasted.success('This team has been changed')
+      this.$router.push('/player/team')
+    },
+    async deleteTeam() {
+      const teamsRef = await this.$fire.database.ref(`teams/${this.id}`)
+      try {
+        await teamsRef.set(null)
+      } catch (e) {
+        this.$toasted.error(e)
+      }
+      const userRef = await this.$fire.database.ref(`users/${this.getUser.id}/teams/${this.id}`)
+      try {
+        await userRef.set(null)
+      } catch (e) {
+        this.$toasted.error(e)
+      }
+      this.$toasted.success('This team has been deleted')
+      this.$router.push('/player/team')
     },
     updateName(field) {
       this.name = field

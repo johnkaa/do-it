@@ -35,7 +35,6 @@ export default {
       try {
         const auth = getAuth()
         updateEmail(auth.currentUser, this.email).then(async () => {
-          this.$toasted.success('Success')
           const userRef = await this.$fire.database.ref(`users/${this.getUser.id}/email`)
           await userRef.set(this.email)
         }).catch((error) => {
@@ -44,6 +43,7 @@ export default {
       } catch (e) {
         return this.$toasted.error(e)
       }
+      this.$toasted.success('Your email has been changed')
     },
     updatePassword(field) {
       this.password = field

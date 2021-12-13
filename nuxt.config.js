@@ -93,7 +93,11 @@ export default {
       dev: process.env.NODE_ENV === 'development',
     }
   },
-
+  generate: {
+    minify: {
+      collapseWhitespace: false
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

@@ -3,6 +3,6 @@ import Toasted from 'vue-toasted';
 
 Vue.use(Toasted, {
   theme: 'bubble',
-  position: 'bottom-right',
+  position: 'top-right',
   duration: 3000
 })

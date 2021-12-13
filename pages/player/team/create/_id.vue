@@ -30,7 +30,7 @@
       </div>
       <div class="create-team__form-btns">
         <nuxt-link to="/player/team"><my-button class="create-team__form-btn secondary">Back</my-button></nuxt-link>
-        <my-button class="create-team__form-btn secondary">Save Team</my-button>
+        <my-button class="create-team__form-btn secondary">Create Team</my-button>
       </div>
     </form>
   </div>
@@ -76,7 +76,7 @@ export default {
       website: '',
       img: '',
       players: {},
-      dateRegistration: ''
+      date: ''
     }
   },
   methods: {
@@ -98,7 +98,7 @@ export default {
           website: this.website,
           img: this.img,
           players: this.players,
-          dateRegistration: this.dateRegistration,
+          creationDate: this.date,
         })
       } catch (e) {
         return this.$toasted.error(e)
@@ -112,21 +112,20 @@ export default {
       } catch (e) {
         return this.$toasted.error(e)
       }
-      this.$toasted.success('Success')
+      this.$toasted.success('This team has been created')
+      this.$router.push('/player/team')
     },
     getDateNow() {
       const dateObj = new Date()
-      let date = dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
-      if(dateObj.getDate() < 10) {
-        date = '0' + dateObj.getDate() + '.' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      let day = dateObj.getDate()
+      let month = (dateObj.getMonth() + 1)
+      if(day < 10) {
+        day = '0' + day
       }
-      if((dateObj.getMonth() + 1) < 10) {
-        date = dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
+      if(month < 10) {
+        month = '0' + month
       }
-      if(dateObj.getDate() < 10 && (dateObj.getMonth() + 1) < 10) {
-        date = '0' + dateObj.getDate() + '.' + '0' +  (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear()
-      }
-      this.dateRegistration = date
+      this.date = day + '/' + month + '/' + dateObj.getFullYear()
     },
     updateName(field) {
       this.name = field

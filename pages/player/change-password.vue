@@ -35,7 +35,6 @@ export default {
       try {
         const auth = getAuth()
         updatePassword(auth.currentUser, this.newPassword).then(async () => {
-          this.$toasted.success('Success')
           const userRef = await this.$fire.database.ref(`users/${this.getUser.id}/password`)
           await userRef.set(this.newPassword)
         }).catch((error) => {
@@ -44,6 +43,7 @@ export default {
       } catch (e) {
         return this.$toasted.error(e)
       }
+      this.$toasted.success('Your password has been changed')
     },
     updatePassword(field) {
       this.password = field
