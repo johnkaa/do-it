@@ -12,7 +12,7 @@
       >
     </div>
     <div class="file-input__preview" v-if="!disablePreview">
-      <img :src="loading || img || fileurl || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'" alt="">
+      <img :src="loading || img || fileurl || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEVNTU2Ojo5ISEiIiIiSkpJ0dHRHR0dsbGxUVFRhYWFwcHBnZ2eKiopYWFiCgoJOTk56enrGDZ/XAAAC5klEQVR4nO3b65aaMBRAYQwRRW6+/9OOyi0JIVEq9oS1v3+1HZd7OJOQ6mQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPNSe/nfck7rV+V7qm4REddanvegzhb9A4WEKv77ISCvUXfHVXaIotbTC65eflsIfonCjwxWqriwb8zb0YIWqyvVT20xFxyrs2vGmQd/HpGMV1vNdkW6HpiMVqta87dPDgelIhZV9Xzs8UzKFTfzrW+duu7+IqRRedTSxcw8UeUqF6qbrLvL1zeLwlVRhPi+OaxaFOqXC56uPvcqrW1gnVKjur7+qwi+zdgrblAr7yxNebfpvgzGkVTqFatzpwquN84NY94+mUTjudLotQk9ws+5pyv7RJArnNUSfQ4mFMafTD20Khea1Ca82qjoNP7F1mdLZQpmLZGS16S5tXef3an4ohUJnBYk9jcqsd5oSKFR33zb3tgQKMzvw01ebQKFz7Ivf29jkF7rHvuhq45BfuLihPsXubWziC+0blfEifrDayC90TwyfrjbiC0v/26bL1UY1/tGVXugeiVZXm+Ki/Z+3kF6Yrb/zbV+yx3fCv8RKL1xshjNjtVHN63+7c1+G8ELPZmisNuNJ6jGh/SO+ORVe6NsM58RxtZnfj/HMqexC72ZoJD6DhgnteeZUeKF3MzTME3pam1PZhSub4azNWvufLOdUdKF7MvROqvPnxZzKLtzwMbDFnIouDGyGgURnTiUXhjbDAGdOJRcGN8PARbTnVHBhZDMMJFpzKrkwthmusuZUcOHyPd23L6I5p3ILV0+G7yQacyq4cHugNadyCzdthtNFnOdUbOHGzXBKnOZUbOHGzXAyzanYwq2b4XQRxzmVWrh9M5wShzmVWhg9Gcbloj+b+NgM/91Z9KdNLl9wez2T1MLvofCHKNxIXuHhf3ft+L9/uA8Kf4PCQxTuR0Rhpor9iAgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQ5w+Okiu2MiAePgAAAABJRU5ErkJggg=='" alt="">
     </div>
   </div>
 </template>
