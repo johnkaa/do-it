@@ -3,7 +3,7 @@
     <input class="checkbox"
            type="checkbox"
            v-model="active"
-           @click="updateActive"
+           @change="updateActive"
            :checked="checked"
            :disabled="disabled">
     <span class="checkbox-style"></span>
