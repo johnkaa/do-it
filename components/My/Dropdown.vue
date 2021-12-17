@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['title', 'items'],
+  props: ['title', 'items', 'index'],
   data() {
     return {
       select: '',
@@ -29,6 +29,9 @@ export default {
     updateSelect(event) {
       const value = event.srcElement.dataset.value
       this.select = value
+      if(this.index !== undefined) {
+        this.$emit('updateSelect', value, this.index)
+      }
       this.$emit('updateSelect', value)
       this.setActive()
     }

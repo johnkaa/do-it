@@ -3,9 +3,7 @@
     <input class="checkbox"
            type="checkbox"
            v-model="active"
-           @change="updateActive"
-           :checked="checked"
-           :disabled="disabled">
+           @change="updateActive">
     <span class="checkbox-style"></span>
     <slot />
   </label>
@@ -13,12 +11,7 @@
 
 <script>
 export default {
-  props: ['text', 'checked', 'disabled'],
-  data() {
-    return {
-      active: false
-    }
-  },
+  props: ['text', 'active'],
   methods: {
     updateActive() {
       setTimeout(() => this.$emit('updateCheckbox', this.active), 10)
