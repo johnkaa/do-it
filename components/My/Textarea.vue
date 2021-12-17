@@ -46,4 +46,17 @@ export default {
       color: #627CA3;
     }
   }
+  .input.secondary {
+    background: #0F1215;
+    border: 2px solid #20252B;
+    .input {
+      &::placeholder {
+        color: #CCCDCD;
+      }
+      &:focus {
+        border-color: lighten(#20252B, 10%);
+        background-color: lighten(#0F1215, 2%);
+      }
+    }
+  }
 </style>
