@@ -174,7 +174,7 @@ export default {
         email: 'admin@admin.ru',
         type: this.addPaymentMethod[0].toUpperCase() + this.addPaymentMethod.slice(1),
         method: 'Admin',
-        amount: `$${this.amount}`
+        amount: `$${this.addPaymentAmount}`
       })
       this.payments.push(payment)
       this.$toasted.success('Payment add successfully')
