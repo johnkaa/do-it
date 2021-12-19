@@ -12,20 +12,20 @@
       </div>
       <div class="edit-account__item">
         <p class="edit-account__item-title">Country</p>
-        <my-dropdown :title="country || 'Choose a country'" @updateSelect="updateCountry" :items="countries"/>
+        <my-dropdown class="secondary" :title="country || 'Choose a country'" @updateSelect="updateCountry" :items="countries"/>
         <p class="edit-account__item-error-message" v-if="$v.country.$error">Field is required</p>
       </div>
       <div class="edit-account__item" v-if="teams">
         <p class="edit-account__item-title">Main Team</p>
-        <my-dropdown :title="mainTeam || 'Main Team'" @updateSelect="updateTeam" :items="teams"/>
+        <my-dropdown class="secondary" :title="mainTeam || 'Main Team'" @updateSelect="updateTeam" :items="teams"/>
       </div>
       <div class="edit-account__item">
         <p class="edit-account__item-title">Sex</p>
-        <my-dropdown :title="sex || `I don't want to talk`" @updateSelect="updateSex" :items="['male', 'female']"/>
+        <my-dropdown class="secondary" :title="sex || `I don't want to talk`" @updateSelect="updateSex" :items="['male', 'female']"/>
       </div>
       <div class="edit-account__item">
         <p class="edit-account__item-title">Date of birth</p>
-        <my-datepicker @updateDate="updateDate" :valueDate="dateOfBirth"/>
+        <my-datepicker class="secondary" @updateDate="updateDate" :valueDate="dateOfBirth"/>
         <p class="edit-account__item-error-message" v-if="$v.dateOfBirth.$error">Field is required</p>
       </div>
       <my-button>Change details</my-button>

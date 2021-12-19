@@ -1,32 +1,46 @@
 <template>
   <div class="edit-team">
+    <my-modal class="edit-team__modal" v-if="showModal" @close="showModal = false">
+      <h2 slot="header">Delete team</h2>
+      <div class="edit-team__body" slot="body">
+        <div class="edit-team__title">Are you sure?</div>
+      </div>
+      <div class="edit-team__footer" slot="footer">
+        <div class="edit-team__btn" @click="showModal = false">
+          <my-button class="secondary">No</my-button>
+        </div>
+        <div class="edit-team__btn" @click="deleteTeam">
+          <my-button>Yes</my-button>
+        </div>
+      </div>
+    </my-modal>
     <h2 class="edit-team__title title">Edit Team</h2>
     <form class="edit-team__form" @submit.prevent="submit">
       <div class="edit-team__form-inner">
         <div class="edit-team__form-title">Basic info</div>
         <p class="edit-team__form-text">Team name</p>
-        <my-input class="edit-team__form-input secondary" placeholder="Team M8B" :field="name" @updateField="updateName"/>
+        <my-input class="edit-team__form-input secondary" :field="name" @updateField="updateName"/>
         <p class="edit-team__form-text">Main Game</p>
         <my-dropdown class="edit-team__form-dropdown secondary" :title="game || 'Choose a game'"
                      @updateSelect="updateGame"
                      :items="games"/>
         <p class="edit-team__form-text">Team Leader</p>
-        <my-input class="edit-team__form-input secondary" placeholder="user" :field="leader" @updateField="updateLeader"/>
+        <my-input class="edit-team__form-input secondary" :field="leader" @updateField="updateLeader"/>
         <p class="edit-team__form-text">Join password</p>
-        <my-input class="edit-team__form-input secondary" placeholder="123213423" :field="password" @updateField="updatePassword"/>
+        <my-input class="edit-team__form-input secondary" :field="password" @updateField="updatePassword"/>
         <p class="edit-team__form-text">Country</p>
         <my-dropdown class="edit-team__form-dropdown secondary" :title="country || 'Choose a country'"
                      @updateSelect="updateCountry"
                      :items="countries"/>
         <p class="edit-team__form-text">Web-site</p>
-        <my-input class="edit-team__form-input secondary" placeholder="TeamBlacer.com" :field="website" @updateField="updateWebsite"/>
+        <my-input class="edit-team__form-input secondary" :field="website" @updateField="updateWebsite"/>
         <p class="edit-team__form-text">URL</p>
         <div class="edit-team__form-url">doit.gg/team/{{ this.id }}</div>
       </div>
       <div class="edit-team__form-inner">
         <div class="edit-team__form-title">Players</div>
         <div class="edit-team__players">
-          <div class="edit-team__players-btn" @click="setListType()">List of players</div>
+          <div class="edit-team__players-btn" @click="setListType">List of players</div>
           <div class="edit-team__players-list" v-if="listType">
             <div class="edit-team__players-list-item">
               <div class="edit-team__players-list-item-id">id</div>
@@ -47,8 +61,8 @@
         <my-file-input name="logo url" :path="`teams/${this.id}/logo`" :img="this.img" @uploadFile="uploadImg"/>
       </div>
       <div class="edit-team__form-btns">
-        <div class="edit-team__form-btn" @click="deleteTeam">
-          <my-button class="edit-team__form-btn secondary" type="button" >Delete Team</my-button>
+        <div class="edit-team__form-btn" @click="showModal = true">
+          <my-button class="edit-team__form-btn secondary" type="button">Delete Team</my-button>
         </div>
         <my-button class="edit-team__form-btn secondary">Save Team</my-button>
       </div>
@@ -97,6 +111,7 @@ export default {
   },
   data() {
     return {
+      showModal: false,
       id: '',
       countries: [],
       games: [],
@@ -261,6 +276,11 @@ export default {
         }
       }
     }
+  }
+  &__footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
 }
 </style>

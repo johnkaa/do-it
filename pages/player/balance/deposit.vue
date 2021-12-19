@@ -6,9 +6,9 @@
     <div class="deposit__doit" v-if="method === 'DOIT'">1$ = 10 DOIT</div>
     <form class="deposit__form" @submit.prevent="submit">
       <div class="deposit__form-text">Name and last name</div>
-      <my-input class="deposit__form-input secondary" placeholder="Nikodem Swider" @updateField="updateName"/>
+      <my-input class="deposit__form-input secondary" @updateField="updateName"/>
       <div class="deposit__form-text">Amount</div>
-      <my-input class="deposit__form-input secondary" placeholder="100" type="number" @updateField="updateAmount"/>
+      <my-input class="deposit__form-input secondary" type="number" @updateField="updateAmount"/>
       <my-button class="deposit__form-btn">Deposit</my-button>
     </form>
   </div>

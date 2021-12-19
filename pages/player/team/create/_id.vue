@@ -5,21 +5,21 @@
       <div class="create-team__form-inner">
         <div class="create-team__form-title">Basic info</div>
         <p class="create-team__form-text">Team name</p>
-        <my-input class="create-team__form-input secondary" placeholder="Team M8B" @updateField="updateName"/>
+        <my-input class="create-team__form-input secondary" @updateField="updateName"/>
         <p class="create-team__form-text">Main Game</p>
         <my-dropdown class="create-team__form-dropdown secondary" title="Choose a game"
                      @updateSelect="updateGame"
                      :items="games"/>
         <p class="create-team__form-text">Team Leader</p>
-        <my-input class="create-team__form-input secondary" placeholder="user" @updateField="updateLeader"/>
+        <my-input class="create-team__form-input secondary" @updateField="updateLeader"/>
         <p class="create-team__form-text">Join password</p>
-        <my-input class="create-team__form-input secondary" placeholder="123213423" @updateField="updatePassword"/>
+        <my-input class="create-team__form-input secondary" @updateField="updatePassword"/>
         <p class="create-team__form-text">Country</p>
         <my-dropdown class="create-team__form-dropdown secondary" title="Choose a country"
                      @updateSelect="updateCountry"
                      :items="countries"/>
         <p class="create-team__form-text">Web-site</p>
-        <my-input class="create-team__form-input secondary" placeholder="TeamBlacer.com" @updateField="updateWebsite"/>
+        <my-input class="create-team__form-input secondary" @updateField="updateWebsite"/>
         <p class="create-team__form-text">URL</p>
         <div class="create-team__form-url">doit.gg/team/{{ this.id }}</div>
       </div>

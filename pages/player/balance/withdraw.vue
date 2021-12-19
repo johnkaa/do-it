@@ -6,11 +6,11 @@
     <div class="withdraw__doit" v-if="method === 'DOIT'">10 DOIT = 1$</div>
     <form class="withdraw__form" @submit.prevent="submit">
       <div class="withdraw__form-text">Name and last name</div>
-      <my-input class="withdraw__form-input secondary" placeholder="Nikodem Swider" @updateField="updateName"/>
+      <my-input class="withdraw__form-input secondary" @updateField="updateName"/>
       <div class="withdraw__form-text">Your email address</div>
-      <my-input class="withdraw__form-input secondary" placeholder="google@gmail.com" type="email" @updateField="updateEmail"/>
+      <my-input class="withdraw__form-input secondary" type="email" @updateField="updateEmail"/>
       <div class="withdraw__form-text">Amount</div>
-      <my-input class="withdraw__form-input secondary" placeholder="100" type="number" @updateField="updateAmount"/>
+      <my-input class="withdraw__form-input secondary" type="number" @updateField="updateAmount"/>
       <my-button class="withdraw__form-btn">Withdraw</my-button>
     </form>
   </div>
