@@ -5,7 +5,6 @@
       <span class="radio__style"></span>
       <span class="radio__text">{{ select.title }}</span>
     </label>
-
   </div>
 </template>
 
