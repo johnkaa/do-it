@@ -45,5 +45,9 @@ export default {
     &:hover {
       background: lighten(#1A222D, 5);
     }
+    &:focus {
+      outline: none;
+      background: lighten(#1A222D, 5);
+    }
   }
 </style>

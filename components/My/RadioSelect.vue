@@ -1,7 +1,7 @@
 <template>
   <div class="radio-select">
     <label class="radio__wrapper" v-for="(select, index) in selects" :key="index">
-      <input class="radio" :name="name" :id="index" type="radio" :value="select.title" v-model="selectValue" @change="updateRadioSelect">
+      <input class="radio" :name="name" :id="index" type="radio" :value="select.title" v-model="selected" @change="updateRadioSelect">
       <span class="radio__style"></span>
       <span class="radio__text">{{ select.title }}</span>
     </label>
@@ -12,9 +12,21 @@
 <script>
 export default {
   props: ['selects', 'name', 'selectValue'],
+  mounted() {
+    setTimeout(() => {
+      if(this.selectValue) {
+        this.selected = this.selectValue
+      }
+    }, 500)
+  },
+  data() {
+    return {
+      selected: ''
+    }
+  },
   methods: {
     updateRadioSelect() {
-      this.$emit('updateRadioSelect', this.selectValue)
+      this.$emit('updateRadioSelect', this.selected)
     }
   }
 }

@@ -30,7 +30,8 @@ export default {
       const value = event.srcElement.dataset.value
       this.select = value
       if(this.index !== undefined) {
-        this.$emit('updateSelect', value, this.index)
+        this.setActive()
+        return this.$emit('updateSelect', value, this.index)
       }
       this.$emit('updateSelect', value)
       this.setActive()
@@ -104,6 +105,13 @@ export default {
     .select__title {
       color: #CCCDCD;
       border: 2px solid #20252B;
+    }
+  }
+  .select.active.secondary {
+    .select__title {
+      background-color: transparent;
+      border-color: #20252B;
+      color: #E6E6E6;
     }
   }
 </style>

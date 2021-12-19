@@ -10,15 +10,21 @@
 export default {
   props: ['mainPage', 'bigSize', 'img', 'title', 'text'],
   mounted() {
+    this.description = this.text
     if(!this.mainPage) {
-      this.text = this.text.substring(0, 120) + '...'
+      this.description = this.text.substring(0, 120) + '...'
     }
     if(this.mainPage) {
       if(this.text.length > 100) {
-        this.text = this.text.substring(0, 150) + '...'
+        this.description = this.text.substring(0, 150) + '...'
       }
     }
   },
+  data() {
+    return {
+      description: ''
+    }
+  }
 }
 </script>
 

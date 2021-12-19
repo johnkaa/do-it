@@ -2,7 +2,7 @@
   <label class="checkbox__wrapper">
     <input class="checkbox"
            type="checkbox"
-           v-model="active"
+           v-model="checkbox"
            @change="updateActive">
     <span class="checkbox-style"></span>
     <slot />
@@ -12,9 +12,21 @@
 <script>
 export default {
   props: ['text', 'active'],
+  mounted() {
+    setTimeout(() => {
+      if(this.active) {
+        this.checkbox = this.active
+      }
+    }, 500)
+  },
+  data() {
+    return {
+      checkbox: false,
+    }
+  },
   methods: {
     updateActive() {
-      setTimeout(() => this.$emit('updateCheckbox', this.active), 10)
+      setTimeout(() => this.$emit('updateCheckbox', this.checkbox), 10)
     }
   }
 }

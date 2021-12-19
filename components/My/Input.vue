@@ -5,7 +5,7 @@
            :type="type"
            min="0"
            :placeholder="placeholder"
-           v-model="field"
+           v-model="input"
            @input="updateField"/>
     <div v-if="fail" class="input__error">{{ errorMessage }}</div>
   </div>
@@ -14,12 +14,24 @@
 <script>
 export default {
   props: ['type', 'placeholder', 'success', 'fail', 'errorMessage', 'field', 'index'],
+  mounted() {
+    setTimeout(() => {
+      if(this.field) {
+        this.input = this.field
+      }
+    }, 500)
+  },
+  data() {
+    return {
+      input: '',
+    }
+  },
   methods: {
     updateField() {
       if(this.index !== undefined) {
-        return this.$emit('updateField', this.field, this.index)
+        return this.$emit('updateField', this.input, this.index)
       }
-      this.$emit('updateField', this.field)
+      this.$emit('updateField', this.input)
     }
   }
 }

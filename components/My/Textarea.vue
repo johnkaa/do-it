@@ -1,16 +1,28 @@
 <template>
   <textarea class="input"
             :placeholder="placeholder"
-            v-model="field"
+            v-model="input"
             @input="updateField"></textarea>
 </template>
 
 <script>
 export default {
   props: ['placeholder', 'field'],
+  mounted() {
+    setTimeout(() => {
+      if(this.field) {
+        this.input = this.field
+      }
+    }, 500)
+  },
+  data() {
+    return {
+      input: ''
+    }
+  },
   methods: {
     updateField() {
-      this.$emit('updateField', this.field)
+      this.$emit('updateField', this.input)
     }
   }
 }
