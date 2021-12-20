@@ -2,9 +2,9 @@
   <div class="home">
     <div class="home__top" v-if="!auth">
       <h1 class="home__title">DOIT BETA</h1>
-      <p class="home__text">
+      <div class="home__text">
         Prepare for your esports career and get ready for awesome tournaments with big prize pools and many fun! <span>Register Now!</span>
-      </p>
+      </div>
       <div class="home__btns">
         <nuxt-link class="home__btn" to="/auth/login">
           <my-button class="secondary">Login</my-button>
@@ -14,20 +14,36 @@
         </nuxt-link>
       </div>
     </div>
-    <div class="home__tournaments">
-      <filtered-slider title="Tournaments" :tournaments="true"/>
+    <div class="home__items">
+      <filtered-slider class="home__items-item">
+        <div class="home__items-title title" slot="title">Tournaments</div>
+        <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameTournamentsFilter"></select-categories>
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in 10" :key="item">
+          <tournaments-card />
+<!--          filteredTournaments-->
+        </swiper-slide>
+      </filtered-slider>
+      <filtered-slider class="home__items-item">
+        <div class="home__items-title title" slot="title">News</div>
+        <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameNewsFilter"></select-categories>
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in filteredNews" :key="item.id">
+          <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
+        </swiper-slide>
+      </filtered-slider>
     </div>
-    <div class="home__news">
-      <filtered-slider title="News" :items="news" :news="true"/>
-    </div>
-    <div class="home__streams">
-      <filtered-slider title="Streams" :streams="true"/>
+    <filtered-slider class="home__items-item">
+      <div class="home__items-title title streams" slot="title">Streams</div>
+      <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameStreamsFilter"></select-categories>
+      <swiper-slide class="home__items-slide" slot="slide" v-for="item in 15" :key="item.id">
+        <tournaments-card />
+      </swiper-slide>
+    </filtered-slider>
+
 <!--      <div v-for="item in streams" :key="item">-->
 <!--        {{ item }}-->
 <!--        <iframe width="560" height="315" :src="`https://www.youtube.com/embed/${item.videoId}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
 <!--      </div>-->
-    </div>
-    <div class="home__partners">
+    <div class="home__partners" id="sponsors">
       <div class="home__partners-title title">Partners</div>
       <div class="home__partners-items">
         <div class="home__partners-item" v-for="(item, index) in partners" :key="index">
@@ -35,53 +51,96 @@
         </div>
       </div>
     </div>
-    <div class="home__games">
-      <div class="home__games-title title">Games</div>
-      <default-slider :items="games" />
+    <div class="home__items home__games">
+      <div class="home__items-title title">Games</div>
+      <default-slider>
+        <swiper-slide class="home__items-slide" slot="slide" v-for="(item, index) in getGames" :key="index">
+          <games-card :title="item.title" :img="item.img" :mainPage="true"/>
+        </swiper-slide>
+      </default-slider>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   head: {
     title: 'Home'
   },
+  computed: {
+    ...mapGetters(['getTournaments', 'getNews', 'getGames']),
+    filteredTournaments() {
+      let tournaments = []
+      Object.keys(this.getTournaments).forEach(item => {
+        tournaments.push(this.getTournaments[item])
+      })
+      if(this.filteredGameTournaments !== '' && this.filteredGameTournaments !== 'All') {
+        return tournaments.filter(element => {
+          return element.game === this.filteredGameTournaments
+        })
+      } else {
+        return tournaments
+      }
+    },
+    filteredNews() {
+      let news = []
+      Object.keys(this.getNews).forEach(item => {
+        news.push(this.getNews[item])
+      })
+      if(this.filteredGameNews !== '' && this.filteredGameNews !== 'All') {
+        return news.filter(element => {
+          return element.game === this.filteredGameNews
+        })
+      } else {
+        return news
+      }
+    },
+    filteredStreams() {
+      // let news = []
+      // Object.keys(this.getNews).forEach(item => {
+      //   news.push(this.getNews[item])
+      // })
+      // if(this.filteredGameNews !== '' && this.filteredGameNews !== 'All') {
+      //   return news.filter(element => {
+      //     return element.game === this.filteredGameNews
+      //   })
+      // } else {
+      //   return news
+      // }
+    }
+  },
   async fetch() {
-    await this.getUser()
-    await this.getNews()
-    await this.getStreams()
     await this.getPartners()
-    await this.getGames()
+  },
+  mounted() {
+    this.getUser()
+    this.$store.dispatch('setGamesAction')
+    this.$store.dispatch('setNewsAction')
+    this.$store.dispatch('setTournamentsAction')
+    Object.keys(this.getNews).forEach(item => {
+      this.news.push(this.getNews[item])
+    })
   },
   data() {
     return {
       auth: false,
-      user: {},
+      showModal: true,
+      games: [],
       news: [],
       streams: [],
       partners: [],
-      games: [],
+      filteredGameTournaments: '',
+      filteredGameNews: '',
+      filteredGameStreams: '',
     }
   },
   methods: {
-    async getUser() {
-      this.$fire.auth.onAuthStateChanged(async (user) => {
+    getUser() {
+      this.$fire.auth.onAuthStateChanged((user) => {
         if(user) {
           this.auth = true
-          const usersRef = this.$fire.database.ref('users')
-          try {
-            const snapshot = await usersRef.once('value')
-            const users = snapshot.val()
-            Object.keys(users).forEach((user) => {
-              if(users[user].uid = this.$fire.auth.currentUser.uid) {
-                this.user = users[user]
-              }
-            })
-            this.lvlWidth = this.user.lvl + '%'
-          } catch (e) {
-            console.log(e)
-          }
         }
       })
     },
@@ -97,15 +156,6 @@ export default {
         })
       })
     },
-    async getNews() {
-      const newsRef = this.$fire.database.ref('news')
-      try {
-        const snapshot = await newsRef.once('value')
-        this.news = snapshot.val()
-      } catch (e) {
-        console.log(e)
-      }
-    },
     async getPartners() {
       const partnersRef = this.$fire.database.ref('partners')
       try {
@@ -115,14 +165,14 @@ export default {
         console.log(e)
       }
     },
-    async getGames() {
-      const gamesRef = this.$fire.database.ref('games')
-      try {
-        const snapshot = await gamesRef.once('value')
-        this.games = snapshot.val()
-      } catch (e) {
-        console.log(e)
-      }
+    updateGameTournamentsFilter(game) {
+      this.filteredGameTournaments = game
+    },
+    updateGameNewsFilter(game) {
+      this.filteredGameNews = game
+    },
+    updateGameStreamsFilter(game) {
+      this.filteredGameStreams= game
     },
   }
 }
@@ -188,6 +238,22 @@ export default {
         justify-content: space-between;
       }
     }
+    &__items-title {
+      &.streams {
+        position: relative;
+        padding-right: 48px;
+        &::after {
+          content: '';
+          width: 32px;
+          height: 32px;
+          background-image: url(static/images/icons/stream.svg);
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-40%);
+        }
+      }
+    }
   }
   @media (max-width: 1350px) {
     .home {
@@ -202,6 +268,11 @@ export default {
       &__top {
         padding-top: 100px;
       }
+    }
+  }
+  @media (max-width: 888px) {
+    .home__items-filter {
+      display: none;
     }
   }
   @media (max-width: 800px) {
@@ -240,6 +311,11 @@ export default {
           max-width: 60px;
         }
       }
+    }
+  }
+  @media (max-width: 500px) {
+    .home__items-slide {
+      max-width: 310px;
     }
   }
 </style>

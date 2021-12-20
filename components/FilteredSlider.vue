@@ -1,23 +1,15 @@
 <template>
   <div class="filtered-slider">
     <div class="filtered-slider__top">
-      <div class="filtered-slider__name title" :class="{ streams: streams }">{{ title }}</div>
+      <slot class="title" name="title"></slot>
       <div class="filtered-slider__categories">
-        <select-categories />
+        <slot class="filtered-slider__categories" name="filter"></slot>
       </div>
     </div>
     <swiper
       class="filtered-slider__items"
       :options="swiperOptions">
-      <swiper-slide class="filtered-slider__item" v-for="item in 10" :key="item" v-if="tournaments">
-        <tournaments-card />
-      </swiper-slide>
-      <swiper-slide class="filtered-slider__item" v-for="(item, index) in items" :key="index" v-if="news">
-        <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
-      </swiper-slide>
-      <swiper-slide class="filtered-slider__item" v-for="item in 10" :key="item" v-if="streams">
-        <tournaments-card />
-      </swiper-slide>
+      <slot name="slide"></slot>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
@@ -25,7 +17,6 @@
 
 <script>
 export default {
-  props: ['title', 'tournaments', 'news', 'streams', 'items'],
   data() {
     return {
       swiperOptions: {
@@ -72,22 +63,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 35px;
-    }
-    &__name {
-      &.streams {
-        position: relative;
-        padding-right: 48px;
-        &::after {
-          content: '';
-          width: 32px;
-          height: 32px;
-          background-image: url(static/images/icons/stream.svg);
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-40%);
-        }
-      }
     }
     &__items {
       padding-bottom: 55px;
