@@ -3,16 +3,13 @@
     class="default-slider__items"
     :options="swiperOptions"
     pagination>
-    <swiper-slide class="default-slider__item" v-for="(item, index) in items" :key="index">
-      <games-card :title="item.title" :img="item.img" :mainPage="true"/>
-    </swiper-slide>
+    <slot name="slide"></slot>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </template>
 
 <script>
 export default {
-  props: ['items'],
   data() {
     return {
       swiperOptions: {
