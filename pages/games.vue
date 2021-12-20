@@ -15,25 +15,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   head: {
     title: 'Games'
   },
-  async fetch() {
-    const gamesRef = this.$fire.database.ref('games')
-    try {
-      const snapshot = await gamesRef.once('value')
-      this.games = snapshot.val()
-    } catch (e) {
-      this.$toasted.error(e)
-    }
-  },
   computed: {
+    ...mapGetters(['getGames']),
     filteredGames() {
       return this.games.filter(element => {
         return element.title.toLowerCase().includes(this.searchField.toLowerCase())
       })
     }
+  },
+  mounted() {
+    this.$store.dispatch('setGamesAction')
+    setTimeout(() => {
+      Object.keys(this.getGames).forEach(item => this.games.push(this.getGames[item]))
+    }, 200)
   },
   data() {
     return {

@@ -17,7 +17,7 @@ export default {
       if(this.active) {
         this.checkbox = this.active
       }
-    }, 500)
+    }, 200)
   },
   data() {
     return {

@@ -13,7 +13,7 @@ export default {
       if(this.field) {
         this.input = this.field
       }
-    }, 500)
+    }, 200)
   },
   data() {
     return {

@@ -3,13 +3,13 @@
     <div class="news__top">
       <h2 class="news__title title">News</h2>
       <div class="news__filter">
-        <select-categories />
+        <select-categories @updateFilter="updateFilter"/>
       </div>
     </div>
     <div class="news__items">
       <news-card
         class="news__item"
-        v-for="(item, index) in news"
+        v-for="(item, index) in filteredNews"
         :key="index"
         :bigSize="index % 6 === 0 || index % 6 === 1"
         :img="item.img"
@@ -21,22 +21,38 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   head: {
     title: 'News'
   },
-  async fetch() {
-    const newsRef = this.$fire.database.ref('news')
-    try {
-      const snapshot = await newsRef.once('value')
-      this.news = snapshot.val()
-    } catch (e) {
-      this.$toasted.error(e)
+  computed: {
+    ...mapGetters(['getNews']),
+    filteredNews() {
+      let news = this.news
+      if(this.filteredGame !== '' && this.filteredGame !== 'All') {
+        return news.filter(element => {
+          return element.game === this.filteredGame
+        })
+      } else {
+        return news
+      }
     }
+  },
+  mounted() {
+    this.$store.dispatch('setNewsAction')
+    Object.keys(this.getNews).forEach(item => this.news.push(this.getNews[item]))
   },
   data() {
     return {
-      news: []
+      news: [],
+      filteredGame: '',
+    }
+  },
+  methods: {
+    updateFilter(game) {
+      this.filteredGame = game
     }
   }
 }

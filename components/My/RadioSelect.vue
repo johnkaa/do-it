@@ -16,7 +16,7 @@ export default {
       if(this.selectValue) {
         this.selected = this.selectValue
       }
-    }, 500)
+    }, 200)
   },
   data() {
     return {
