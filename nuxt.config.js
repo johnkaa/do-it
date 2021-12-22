@@ -28,6 +28,7 @@ export default {
     { src: '~plugins/vuelidate', mode: 'client' },
     { src: '~plugins/v-calendar', mode: 'client' },
     { src: '~plugins/toast', mode: 'client' },
+    { src: '~plugins/flags', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
