@@ -2,22 +2,18 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-
         <div class="modal-container">
         <img class="modal-close" src="/images/icons/exit.svg" alt="" @click="$emit('close')">
-
           <div class="modal-header">
             <slot name="header">
               default header
             </slot>
           </div>
-
           <div class="modal-body">
             <slot name="body">
               default body
             </slot>
           </div>
-
           <div class="modal-footer">
             <slot name="footer">
               <my-button class="modal-default-button">Send</my-button>

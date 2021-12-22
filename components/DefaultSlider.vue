@@ -49,5 +49,6 @@ export default {
 <style lang="scss" scoped>
   .default-slider__items {
     cursor: pointer;
+    padding-bottom: 50px;
   }
 </style>

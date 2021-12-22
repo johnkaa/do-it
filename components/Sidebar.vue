@@ -2,22 +2,22 @@
   <aside class="sidebar">
     <ul class="sidebar__list">
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/games">
           <img src="/images/sidebar/item-01.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/leagues">
           <img src="/images/sidebar/item-02.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/top">
           <img src="/images/sidebar/item-03.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/#sponsors">
           <img src="/images/sidebar/item-04.svg" alt="">
         </nuxt-link>
       </li>

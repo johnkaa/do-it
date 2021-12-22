@@ -1,24 +1,24 @@
 <template>
-  <div class="tournaments-card">
-    <img class="tournaments-card__img" src="/images/games/dota-tournament.jpg" alt="">
+  <div class="tournaments-card" @click="$emit('click')">
+    <img class="tournaments-card__img" :src="img" alt="">
     <div class="tournaments-card__inner">
-      <div class="tournaments-card__title">Tournament’s name will be here, maybe, in two lines</div>
+      <div class="tournaments-card__title">{{ title }}</div>
       <div class="tournaments-card__items">
         <div class="tournaments-card__item">
           <div class="tournaments-card__item-title">Start</div>
-          <div class="tournaments-card__item-text">07/06</div>
+          <div class="tournaments-card__item-text">{{ start }}</div>
         </div>
         <div class="tournaments-card__item">
           <div class="tournaments-card__item-title">Mode</div>
-          <div class="tournaments-card__item-text">5v5</div>
+          <div class="tournaments-card__item-text">{{ mode }}</div>
         </div>
         <div class="tournaments-card__item">
           <div class="tournaments-card__item-title">Slots</div>
-          <div class="tournaments-card__item-text">16/30</div>
+          <div class="tournaments-card__item-text">{{ slots }}</div>
         </div>
         <div class="tournaments-card__item">
           <div class="tournaments-card__item-title">Pool</div>
-          <div class="tournaments-card__item-text">$ 1500</div>
+          <div class="tournaments-card__item-text">{{ pool }}</div>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['title']
+  props: ['title', 'img', 'start', 'mode', 'slots', 'pool']
 }
 </script>
 

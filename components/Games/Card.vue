@@ -1,6 +1,6 @@
 <template>
   <div class="games__item mainPage" :class="{ mainPage: mainPage }">
-    <div class="games__item-img">
+    <div class="games__item-img" @click="$emit('click')">
       <img :src="img" alt="">
       <div class="games__item-text">{{ title }}</div>
     </div>
