@@ -22,12 +22,12 @@
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/internal-links">
           <img src="/images/sidebar/item-05.svg" alt="">
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/">
+        <nuxt-link class="sidebar__list-link" to="/social-media">
           <img src="/images/sidebar/item-06.svg" alt="">
         </nuxt-link>
       </li>

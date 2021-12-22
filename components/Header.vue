@@ -11,7 +11,7 @@
     <div class="burger__menu" :class="{ active: burgerActive }" @click="setBurgerActive">
       <ul class="menu__list">
         <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/play">Play</nuxt-link>
+          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>
         </li>
         <li class="menu__list-item">
           <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>
@@ -40,7 +40,7 @@
     <nav class="menu">
       <ul class="menu__list">
         <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/leagues">Play</nuxt-link>
+          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>
         </li>
         <li class="menu__list-item">
           <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>
