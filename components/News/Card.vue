@@ -147,5 +147,19 @@ export default {
         max-width: 290px;
       }
     }
+    .news-card.mainPage {
+      .news-card {
+        max-width: 365px;
+        &__img {
+          max-width: 365px;
+        }
+        &__title {
+          max-width: 360px;
+        }
+        &__text {
+          max-width: 350px;
+        }
+      }
+    }
   }
 </style>
