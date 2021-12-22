@@ -22,7 +22,7 @@
         <div class="leagues__item-info">{{ item.title }}</div>
         <div class="leagues__item-info">{{ item.entryPrice }}</div>
         <div class="leagues__item-info">{{ item.prizePool }}</div>
-        <div class="leagues__item-info" v-if="item.players">{{ item.players.length }} / {{ item.maxPlayers || '∞' }}</div>
+        <div class="leagues__item-info" v-if="item.players">{{ Object.keys(item.players).length }} / {{ item.maxPlayers || '∞' }}</div>
         <div class="leagues__item-info" v-else>0 / {{ item.maxPlayers || '∞' }}</div>
         <div class="leagues__item-info">{{ item.startDate }}</div>
         <nuxt-link class="leagues__item-info edit" v-if="edit" :to="`/admin/edit/league/${item.id}`">edit</nuxt-link>
@@ -99,11 +99,11 @@ export default {
     },
     sortByTitle() {
       this.sort = 'title'
-      this.tournaments.sort((a,b) => a.title.localeCompare(b.title))
+      this.leagues.sort((a,b) => a.title.localeCompare(b.title))
     },
     sortByEntry() {
       this.sort = 'entry'
-      this.tournaments.sort((a,b) => {
+      this.leagues.sort((a,b) => {
         if(Number.isInteger(+a.entryPrice.slice(1))) {
           return a.entryPrice.slice(1) - b.entryPrice.slice(1)
         } else {
@@ -113,7 +113,7 @@ export default {
     },
     sortByPool() {
       this.sort = 'pool'
-      this.tournaments.sort((a,b) => {
+      this.leagues.sort((a,b) => {
         if(Number.isInteger(+a.prizePool.slice(1))) {
           return a.prizePool.slice(1) - b.prizePool.slice(1)
         } else {
@@ -123,13 +123,13 @@ export default {
     },
     sortBySigned() {
       this.sort = 'signed'
-      if(this.tournaments.players) {
-        this.tournaments.sort((a,b) => a.players.length.localeCompare(b.players.length))
+      if(this.leagues.players) {
+        this.leagues.sort((a,b) => a.players.length.localeCompare(b.players.length))
       }
     },
     sortByStart() {
       this.sort = 'start'
-      this.tournaments.sort((a,b) => a.startDate.localeCompare(b.startDate))
+      this.leagues.sort((a,b) => a.startDate.localeCompare(b.startDate))
     },
   }
 }
