@@ -528,7 +528,7 @@ export default {
       games: [],
       type: '',
       format: '',
-      mode: '',
+      mode: '5 vs 5',
       mapVoting: '',
       registrationType: 'Free',
       startActive: false,
@@ -670,7 +670,7 @@ export default {
           youtubeUrl: this.youtubeUrl,
           streams: this.streams,
           sponsors: this.sponsors,
-          tournament: this.tournament,
+          tournament: this.tournament || '',
           rules: this.rules,
         }
         this.$store.dispatch('setLeagueInfoAction', leagueUpdate)
