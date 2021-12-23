@@ -22,7 +22,7 @@
         <div class="tournaments__item-info">{{ item.title }}</div>
         <div class="tournaments__item-info">{{ item.entryPrice }}</div>
         <div class="tournaments__item-info">{{ item.prizePool }}</div>
-        <div class="tournaments__item-info" v-if="item.players">{{ item.players.length }} / {{ item.maxPlayers || '∞' }}</div>
+        <div class="tournaments__item-info" v-if="item.players">{{ Object.keys(item.players).length }} / {{ item.maxPlayers || '∞' }}</div>
         <div class="tournaments__item-info" v-else>0 / {{ item.maxPlayers || '∞' }}</div>
         <div class="tournaments__item-info">{{ item.startDate }}</div>
         <nuxt-link class="tournaments__item-info edit" v-if="edit" :to="`/admin/edit/tournament/${item.id}`">edit</nuxt-link>
