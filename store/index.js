@@ -167,6 +167,9 @@ export const mutations = {
     if(tournaments.delete) {
       return delete state.tournaments[tournaments.id]
     }
+    if(tournaments.finish) {
+      return state.tournaments[tournaments.id].status = tournaments.status
+    }
     if(!state.tournaments[tournaments.id]) {
       state.tournaments[tournaments.id] = {
         id: tournaments.id
@@ -228,6 +231,7 @@ export const mutations = {
     state.tournaments[tournaments.id].streams = tournaments.streams
     state.tournaments[tournaments.id].sponsors = tournaments.sponsors
     state.tournaments[tournaments.id].rules = tournaments.rules
+    state.tournaments[tournaments.id].status = tournaments.status
   },
   setLeagues(state, leagues) {
     state.leagues = leagues

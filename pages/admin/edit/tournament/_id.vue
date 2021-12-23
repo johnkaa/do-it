@@ -376,7 +376,8 @@
       </div>
       <div class="tournaments-edit__form-btns">
         <nuxt-link to="/admin/tournaments" v-if="this.new"><my-button class="tournaments-edit__form-btn secondary">Back</my-button></nuxt-link>
-        <div v-else @click="deleteTournament"><my-button class="tournaments-edit__form-btn secondary" type="button">Delete Tournament</my-button></div>
+        <div @click="deleteTournament" v-else><my-button class="tournaments-edit__form-btn secondary" type="button">Delete Tournament</my-button></div>
+        <div @click="finishTournament" v-if="!this.new"><my-button class="tournaments-edit__form-btn secondary" type="button">Finish Tournament</my-button></div>
         <my-button class="tournaments-edit__form-btn secondary">Save changes</my-button>
       </div>
     </form>
@@ -691,6 +692,7 @@ export default {
           streams: this.streams,
           sponsors: this.sponsors,
           rules: this.rules,
+          status: 'upcoming'
         }
         this.$store.dispatch('setTournamentInfoAction', tournamentUpdate)
         this.$router.push({
@@ -707,6 +709,21 @@ export default {
       } else {
         this.$toasted.error('You have not filled in all the required fields!')
       }
+    },
+    finishTournament() {
+      const tournamentFinish = {
+        id: this.id,
+        finish: true,
+        status: 'past'
+      }
+      this.$store.dispatch('setTournamentInfoAction', tournamentFinish)
+      this.$router.push({
+        path: '/admin/tournaments',
+        query: {
+          edit: true
+        }
+      })
+      this.$toasted.success('Tournament have been finished')
     },
     deleteTournament() {
       const tournamentDelete = {
@@ -1106,7 +1123,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 34px;
+        gap: 13px;
       }
       &-btn {
         max-width: 200px;
