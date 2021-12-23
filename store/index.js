@@ -177,6 +177,8 @@ export const mutations = {
     }
     state.tournaments[tournaments.id].host = tournaments.host
     state.tournaments[tournaments.id].title = tournaments.title
+    state.tournaments[tournaments.id].platform = tournaments.platform
+    state.tournaments[tournaments.id].server = tournaments.server
     state.tournaments[tournaments.id].img = tournaments.img
     state.tournaments[tournaments.id].bg = tournaments.bg
     state.tournaments[tournaments.id].quickRules = tournaments.quickRules

@@ -17,6 +17,16 @@
             <my-input class="secondary" :field="title" @updateField="updateTitle"/>
             <p class="tournaments-edit__fail-message" v-if="$v.title.$error">Field is required</p>
           </div>
+          <p class="tournaments-edit__form-text">Platform</p>
+          <my-dropdown class="tournaments-edit__form-dropdown secondary"
+                       :title="platform"
+                       @updateSelect="updatePlatform"
+                       :items="['PC', 'Xbox', 'PS4', 'PS5']"/>
+          <p class="tournaments-edit__form-text">Server</p>
+          <my-dropdown class="tournaments-edit__form-dropdown secondary"
+                       :title="server"
+                       @updateSelect="updateServer"
+                       :items="['Europe', 'Australia', 'Asia', 'America']"/>
           <p class="tournaments-edit__form-text">URL</p>
           <div class="tournaments-edit__form-url">doit.gg/tournaments/{{ this.id }}</div>
           <p class="tournaments-edit__form-text">Quick Rules</p>
@@ -445,6 +455,8 @@ export default {
     if(this.getTournaments[this.id]) {
       this.host = this.getTournaments[this.id].host
       this.title = this.getTournaments[this.id].title
+      this.platform = this.getTournaments[this.id].platform
+      this.server = this.getTournaments[this.id].server
       this.img = this.getTournaments[this.id].img
       this.bg = this.getTournaments[this.id].bg
       this.quickRules = this.getTournaments[this.id].quickRules
@@ -536,6 +548,8 @@ export default {
       host: '',
       hosts: [],
       title: '',
+      platform: 'PC',
+      server: 'Europe',
       quickRules: '',
       img: '',
       bg: '',
@@ -638,6 +652,8 @@ export default {
           id: this.id,
           host: this.host,
           title: this.title,
+          platform: this.platform,
+          server: this.server,
           img: this.img,
           bg: this.bg,
           quickRules: this.quickRules,
@@ -753,6 +769,12 @@ export default {
     },
     updateTitle(field) {
       this.title = field
+    },
+    updatePlatform(select) {
+      this.platform = select
+    },
+    updateServer(select) {
+      this.server = select
     },
     updateDescription(field) {
       this.description = field
