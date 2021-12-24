@@ -12,7 +12,7 @@
         </nuxt-link>
       </li>
       <li class="sidebar__list-item">
-        <nuxt-link class="sidebar__list-link" to="/top">
+        <nuxt-link class="sidebar__list-link" to="/top/2021/players">
           <img src="/images/sidebar/item-03.svg" alt="">
         </nuxt-link>
       </li>

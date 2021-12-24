@@ -197,8 +197,7 @@ export default {
     &__info {
       border: 2px solid #565656;
       padding: 50px;
-      max-width: 808px;
-      width: 100%;
+      width: 808px;
     }
     &__requirements {
       max-width: 408px;
@@ -246,6 +245,10 @@ export default {
     .league__inner {
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .league__info {
+      max-width: 808px;
+      width: 100%;
     }
   }
   @media (max-width: 600px) {

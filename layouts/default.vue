@@ -20,6 +20,9 @@ export default {
 </script>
 
 <style scoped>
+  .app {
+    padding-bottom: 20px;
+  }
   @media (max-width: 1100px) {
     .container {
       padding: 0 15px 105px 15px;

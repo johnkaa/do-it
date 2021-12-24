@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  props: ['placeholder', 'field'],
+  props: ['placeholder', 'field', 'changes'],
+  watch: {
+    changes() {
+      this.input = ''
+    }
+  },
   mounted() {
     setTimeout(() => {
       if(this.field) {
