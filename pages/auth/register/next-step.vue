@@ -23,7 +23,7 @@
           </div>
           <div class="register__form-item">
             <p class="register__form-text">Date of birth</p>
-            <my-datepicker @updateDate="updateDate"/>
+            <my-datepicker @updateDate="updateDate" max="Fri Dec 31 2008 02:39:31"/>
             <p class="register__fail-message" v-if="$v.dateOfBirth.$error">Field is required</p>
           </div>
           <div class="register__form-item">

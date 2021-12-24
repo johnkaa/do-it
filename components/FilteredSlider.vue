@@ -66,7 +66,6 @@ export default {
     }
     &__items {
       padding-bottom: 55px;
-      cursor: pointer;
     }
   }
   @media (max-width: 777px) {

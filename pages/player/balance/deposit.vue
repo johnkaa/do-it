@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     async submit() {
-      if(!this.name && !this.amount) {
+      if(!this.name || !this.amount) {
         return this.$toasted.error('All fields are required')
       }
       if(this.method === 'DOIT') {

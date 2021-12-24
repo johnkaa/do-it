@@ -80,12 +80,12 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 25px;
+      gap: 20px;
     }
     .subscribe__item {
       background: radial-gradient(250.9% 252.09% at -142.43% -152.09%, rgba(20, 114, 255, 0.35) 0%, rgba(20, 114, 255, 0) 100%), #181B1F;
       padding: 100px 22px 36px;
-      max-width: 260px;
+      max-width: 250px;
       width: 100%;
       &-title {
         color: #2788F6;

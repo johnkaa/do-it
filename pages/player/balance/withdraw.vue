@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async submit() {
-      if(!this.name && !this.email && !this.amount) {
+      if(!this.name || !this.email || !this.amount) {
         return this.$toasted.error('All fields are required')
       }
       if(this.getUser.eur < this.amount) {

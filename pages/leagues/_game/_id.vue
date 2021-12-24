@@ -42,6 +42,9 @@
           <div class="league__requirements-sign-btn" @click="unregister" v-if="registered">
             <my-button class="secondary">Unregister</my-button>
           </div>
+          <nuxt-link class="tournament__requirements-sign-btn" v-else-if="!this.$fire.auth.currentUser" to="/auth/login">
+            <my-button>Log in / Register</my-button>
+          </nuxt-link>
           <div class="league__requirements-sign-btn" @click="register" v-else>
             <my-button>Register</my-button>
           </div>
@@ -104,6 +107,17 @@ export default {
       if(this.league.maxPlayers && (Object.keys(this.league.players).length === +this.league.maxPlayers)) {
         return this.$toasted.error('No slots available')
       }
+      if(this.league.entryPrice !== 'Free' && this.league.entryPrice !== 'Premium') {
+        if(this.getUser.eur - +this.league.entryPrice.slice(1) < 0) {
+          return this.$toasted.error("You don't have enough money")
+        }
+        const userRef = await this.$fire.database.ref(`users/${this.getUser.id}/eur`)
+        try {
+          await userRef.set(this.getUser.eur - +this.league.entryPrice.slice(1))
+        } catch (e) {
+          this.$toasted.error(e)
+        }
+      }
       const leaguesRef = await this.$fire.database.ref(`leagues/${this.id}/players/${this.getUser.id}`)
       try {
         await leaguesRef.set({
@@ -112,14 +126,6 @@ export default {
         })
       } catch (e) {
         this.$toasted.error(e)
-      }
-      if(this.league.entryPrice !== 'Free') {
-        const userRef = await this.$fire.database.ref(`users/${this.getUser.id}/eur`)
-        try {
-          await userRef.set(this.getUser.eur - +this.league.entryPrice.slice(1))
-        } catch (e) {
-          this.$toasted.error(e)
-        }
       }
       this.registered = true
       this.$toasted.success('You have registered')
@@ -148,6 +154,7 @@ export default {
 
 <style lang="scss" scoped>
   .league {
+    padding-bottom: 30px;
     &__top {
       display: flex;
       justify-content: space-between;
@@ -191,6 +198,7 @@ export default {
       border: 2px solid #565656;
       padding: 50px;
       max-width: 808px;
+      width: 100%;
     }
     &__requirements {
       max-width: 408px;

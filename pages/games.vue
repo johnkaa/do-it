@@ -4,13 +4,14 @@
       <h2 class="games__title title">Games</h2>
       <input class="games__search" placeholder="Search the game" v-model="searchField" />
     </div>
-    <div class="games__items">
+    <div class="games__items" v-if="filteredGames">
       <games-card class="games__item"
                   v-for="(item, index) in filteredGames"
                   :key="index"
                   :title="item.title"
                   :img="item.img"/>
     </div>
+    <div class="games__not-found" v-if="filteredGames.length === 0">Games not found</div>
   </div>
 </template>
 
@@ -86,6 +87,13 @@ export default {
       height: 100%;
       width: 100%;
       display: block;
+    }
+    &__not-found {
+      color: #B83333;
+      text-align: center;
+      margin: 50px 0;
+      font-size: 30px;
+      font-weight: 500;
     }
   }
   @media (max-width: 1300px) {

@@ -6,14 +6,14 @@
       locale="en"
       title-position="left"
       :min-date="'Fri Dec 31 1955 02:39:31'"
-      :max-date="'Fri Dec 31 2015 02:39:31'"
+      :max-date="max || 'Fri Dec 31 2021 02:39:31'"
       v-model="select"/>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['valueDate'],
+  props: ['valueDate', 'max'],
   watch: {
     select() {
       let day = ''

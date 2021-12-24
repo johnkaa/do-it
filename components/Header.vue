@@ -126,7 +126,7 @@ export default {
     },
     setUserActive() {
       this.userActive = !this.userActive
-    }
+    },
   }
 }
 </script>
@@ -154,6 +154,7 @@ export default {
       margin-left: 8px;
     }
   }
+
   .menu__list {
     display: flex;
     &-item {

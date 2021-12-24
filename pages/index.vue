@@ -18,31 +18,35 @@
       <filtered-slider class="home__items-item">
         <div class="home__items-title title" slot="title">Tournaments</div>
         <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameTournamentsFilter"></select-categories>
-        <swiper-slide class="home__items-slide" slot="slide" v-for="item in 10" :key="item">
-          <tournaments-card />
-<!--          filteredTournaments-->
-        </swiper-slide>
+        <template v-if="filteredTournaments.length > 0">
+          <swiper-slide class="home__items-slide" slot="slide" v-for="item in filteredTournaments" :key="item.id">
+            <tournaments-card :title="item.title"
+                              :img="item.img"
+                              :start="item.startDate.substring(0, item.startDate.length-11)"
+                              :mode="item.mode"
+                              :slots="(item.players ? Object.keys(item.players).length : 0 || 0) + '/' + (item.maxPlayers || '∞')"
+                              :pool="item.prizePool"
+                              @click="$router.push(`/tournaments/${item.game}/${item.id}`)"/>
+          </swiper-slide>
+        </template>
       </filtered-slider>
-      <filtered-slider class="home__items-item">
+      <div class="not-found" v-if="filteredTournaments.length === 0">Tournaments not found</div>
+      <filtered-slider class="home__items-item" v-if="filteredNews.length > 0">
         <div class="home__items-title title" slot="title">News</div>
         <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameNewsFilter"></select-categories>
         <swiper-slide class="home__items-slide" slot="slide" v-for="item in filteredNews" :key="item.id">
           <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
         </swiper-slide>
       </filtered-slider>
+      <filtered-slider class="home__items-item" v-if="streams">
+<!--      <filtered-slider class="home__items-item" v-if="filteredStreams.length > 0">-->
+        <div class="home__items-title title streams" slot="title">Streams</div>
+        <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameStreamsFilter"></select-categories>
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in 9" :key="item">
+          <iframe height="420" width="370" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </swiper-slide>
+      </filtered-slider>
     </div>
-    <filtered-slider class="home__items-item">
-      <div class="home__items-title title streams" slot="title">Streams</div>
-      <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameStreamsFilter"></select-categories>
-      <swiper-slide class="home__items-slide" slot="slide" v-for="item in 15" :key="item.id">
-        <tournaments-card />
-      </swiper-slide>
-    </filtered-slider>
-
-<!--      <div v-for="item in streams" :key="item">-->
-<!--        {{ item }}-->
-<!--        <iframe width="560" height="315" :src="`https://www.youtube.com/embed/${item.videoId}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
-<!--      </div>-->
     <div class="home__partners" id="sponsors">
       <div class="home__partners-title title">Partners</div>
       <div class="home__partners-items">
@@ -54,7 +58,7 @@
     <div class="home__items home__games">
       <div class="home__items-title title">Games</div>
       <default-slider>
-        <swiper-slide class="home__items-slide" slot="slide" v-for="(item, index) in getGames" :key="index">
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in getGames" :key="item.id">
           <games-card :title="item.title" :img="item.img" :mainPage="true"/>
         </swiper-slide>
       </default-slider>
@@ -90,6 +94,12 @@ export default {
         news.push(this.getNews[item])
       })
       if(this.filteredGameNews !== '' && this.filteredGameNews !== 'All') {
+        if(news.filter(element => {
+          return element.game === this.filteredGameNews
+        }).length === 0) {
+          this.$toasted.error('News not found.')
+          return news
+        }
         return news.filter(element => {
           return element.game === this.filteredGameNews
         })
@@ -129,7 +139,6 @@ export default {
       showModal: true,
       games: [],
       news: [],
-      streams: [],
       partners: [],
       filteredGameTournaments: '',
       filteredGameNews: '',
@@ -172,7 +181,7 @@ export default {
       this.filteredGameNews = game
     },
     updateGameStreamsFilter(game) {
-      this.filteredGameStreams= game
+      this.filteredGameStreams = game
     },
   }
 }
@@ -181,6 +190,7 @@ export default {
 <style lang="scss" scoped>
   @import "assets/styles/var";
   .home {
+    padding-bottom: 30px;
     background-image: url(static/images/bg.jpg);
     &__top {
       text-align: center;
@@ -229,8 +239,7 @@ export default {
       margin-bottom: 100px;
     }
     &__games {
-      padding-bottom: 100px;
-      &-title {
+      .home__items-title {
         margin-bottom: 50px;
       }
       &-items {
@@ -254,6 +263,21 @@ export default {
         }
       }
     }
+  }
+  .not-found {
+    color: #fff;
+    background-color: #B83333;
+    display: inline-block;
+    text-align: center;
+    margin: 50px auto;
+    padding: 10px 15px;
+    font-size: 30px;
+    font-weight: 500;
+    position: relative;
+    top: -85px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
   }
   @media (max-width: 1350px) {
     .home {
