@@ -160,4 +160,27 @@ export default {
       border: 2px solid #242B33;
     }
   }
+  @media (max-width: 860px) {
+    .top {
+      &__top {
+        &-items {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+        }
+      }
+      &__nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        &-link {
+          border: 2px solid #242B33;
+          & + & {
+            border: 2px solid #242B33;
+          }
+        }
+      }
+    }
+  }
 </style>

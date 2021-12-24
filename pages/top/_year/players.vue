@@ -111,4 +111,41 @@ export default {
       }
     }
   }
+  @media (max-width: 1000px) {
+    .players {
+      &__item {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  }
+  @media (max-width: 800px) {
+    .players {
+      &__item {
+        grid-template-columns: repeat(4, 1fr);
+        &-overall {
+          display: none;
+        }
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    .players {
+      &__item {
+        grid-template-columns: repeat(3, 1fr);
+        &-username {
+          display: none;
+        }
+      }
+    }
+  }
+  @media (max-width: 450px) {
+    .players {
+      &__item {
+        grid-template-columns: repeat(2, 1fr);
+        &-year {
+          display: none;
+        }
+      }
+    }
+  }
 </style>

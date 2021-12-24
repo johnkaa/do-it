@@ -3,7 +3,7 @@
     <div class="countries__items">
       <div class="countries__item">
         <div class="countries__item-rank">Rank</div>
-        <div class="countries__item-country">Country & Name</div>
+        <div class="countries__item-country">Country <span class="countries__mobile">& Name</span></div>
         <div class="countries__item-players">Players</div>
       </div>
       <div class="countries__item" v-for="item in filteredCountries">
@@ -70,41 +70,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.countries {
-  &__item {
-    display: grid;
-    grid-template-columns: 45px 285px 140px;
-    justify-content: space-between;
-    padding: 0 36px;
-    color: #67707A;
-    &:nth-child(1) {
-      text-transform: uppercase;
-      padding-top: 30px;
-      font-weight: 700;
-      color: #E6E6E6;
-      padding-bottom: 22px;
-      border-bottom: 2px solid #242B33;
-    }
-    &:last-child {
-      padding-bottom: 30px;
-    }
-    &-rank {
-      text-align: center;
-    }
-    &-title {
-      display: flex;
-      gap: 12px;
-    }
-    &-name {
-      color: #CCCCCC;
-      font-size: 16px;
-    }
-    &-flag {
-      margin-top: -8px;
-    }
-    & + & {
-      margin-top: 20px;
+  .countries {
+    &__item {
+      display: grid;
+      grid-template-columns: 45px 285px 140px;
+      justify-content: space-between;
+      padding: 0 36px;
+      color: #67707A;
+      &:nth-child(1) {
+        text-transform: uppercase;
+        padding-top: 30px;
+        font-weight: 700;
+        color: #E6E6E6;
+        padding-bottom: 22px;
+        border-bottom: 2px solid #242B33;
+      }
+      &:last-child {
+        padding-bottom: 30px;
+      }
+      &-rank {
+        text-align: center;
+      }
+      &-title {
+        display: flex;
+        gap: 12px;
+      }
+      &-name {
+        color: #CCCCCC;
+        font-size: 16px;
+      }
+      &-flag {
+        margin-top: -8px;
+      }
+      & + & {
+        margin-top: 20px;
+      }
     }
   }
-}
+  @media (max-width: 600px) {
+    .countries {
+      &__item {
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 0;
+      }
+    }
+    .countries__item-name, .countries__mobile {
+      display: none;
+    }
+  }
 </style>

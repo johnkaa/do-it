@@ -98,4 +98,39 @@ export default {
       }
     }
   }
+  @media (max-width: 800px) {
+    .tournament__info {
+      grid-template-columns: repeat(5, 1fr);
+      &-item:nth-child(6) {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    .tournament__info {
+      grid-template-columns: repeat(4, 1fr);
+      &-item:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    .tournament {
+      padding-right: 10px;
+    }
+    .tournament__info {
+      grid-template-columns: repeat(3, 1fr);
+      &-item:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 430px) {
+    .tournament__info {
+      grid-template-columns: repeat(2, 1fr);
+      &-item:nth-child(5) {
+        display: none;
+      }
+    }
+  }
 </style>

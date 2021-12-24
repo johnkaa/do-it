@@ -109,4 +109,24 @@ export default {
       }
     }
   }
+  @media (max-width: 699px) {
+    .teams {
+      &__item {
+        grid-template-columns: repeat(3, 1fr);
+        &-overall {
+          display: none;
+        }
+      }
+    }
+  }
+  @media (max-width: 555px) {
+    .teams {
+      &__item {
+        grid-template-columns: repeat(2, 1fr);
+        &-year {
+          display: none;
+        }
+      }
+    }
+  }
 </style>
