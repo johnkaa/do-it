@@ -38,11 +38,9 @@
           <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
         </swiper-slide>
       </filtered-slider>
-      <filtered-slider class="home__items-item" v-if="streams">
-<!--      <filtered-slider class="home__items-item" v-if="filteredStreams.length > 0">-->
+      <filtered-slider class="home__items-item">
         <div class="home__items-title title streams" slot="title">Streams</div>
-        <select-categories class="home__items-filter" slot="filter" @updateFilter="updateGameStreamsFilter"></select-categories>
-        <swiper-slide class="home__items-slide" slot="slide" v-for="item in 9" :key="item">
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in 6" :key="item">
           <iframe height="420" width="370" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </swiper-slide>
       </filtered-slider>
@@ -107,19 +105,6 @@ export default {
         return news
       }
     },
-    filteredStreams() {
-      // let news = []
-      // Object.keys(this.getNews).forEach(item => {
-      //   news.push(this.getNews[item])
-      // })
-      // if(this.filteredGameNews !== '' && this.filteredGameNews !== 'All') {
-      //   return news.filter(element => {
-      //     return element.game === this.filteredGameNews
-      //   })
-      // } else {
-      //   return news
-      // }
-    }
   },
   async fetch() {
     await this.getPartners()
@@ -142,7 +127,6 @@ export default {
       partners: [],
       filteredGameTournaments: '',
       filteredGameNews: '',
-      filteredGameStreams: '',
     }
   },
   methods: {
@@ -151,18 +135,6 @@ export default {
         if(user) {
           this.auth = true
         }
-      })
-    },
-    async getStreams() {
-      const fetchLink = 'https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=live&type=video&videoCategoryId=20&regionCode=US&maxResults=50&key=AIzaSyDIusejjOkgpbi5u2wWMjqbavAYteeuoGo'
-      await fetch(fetchLink, {
-        method: 'get',
-      }).then((response) => {
-        return response.json()
-      }).then((data) => {
-        Object.keys(data.items).forEach((item) => {
-          this.streams.push(data.items[item])
-        })
       })
     },
     async getPartners() {
