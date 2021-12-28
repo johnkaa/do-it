@@ -28,7 +28,7 @@ export default {
       const gamesObj = snapshot.val()
       return { gamesObj }
     } catch (e) {
-      this.$toasted.error(e)
+      console.log(e)
     }
   },
   computed: {

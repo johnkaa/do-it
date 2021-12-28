@@ -59,24 +59,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 const { getCode } = require('country-list');
 
 export default {
-  computed: {
-    ...mapGetters(['getTournaments']),
-  },
-  watch: {
-    getTournaments() {
-      this.setupTournament()
+  async asyncData({ $fire }) {
+    const tournamentsRef = $fire.database.ref('tournaments')
+    try {
+      const snapshot = await tournamentsRef.once('value')
+      const tournaments = snapshot.val()
+      return { tournaments }
+    } catch (e) {
+      console.log(e)
     }
   },
   mounted() {
     this.id = this.$route.params.id
-    this.$store.dispatch('setTournamentsAction')
-    setTimeout(() => {
-      this.setupTournament()
-    }, 500)
+    Object.keys(this.tournaments).forEach(item => {
+      if(this.tournaments[item].id === this.id) {
+        this.tournament = this.tournaments[item]
+      }
+    })
   },
   data() {
     return {
@@ -105,13 +107,6 @@ export default {
     code(country) {
       return getCode(country)
     },
-    setupTournament() {
-      Object.keys(this.getTournaments).forEach(item => {
-        if(this.getTournaments[item].id === this.id) {
-          this.tournament = this.getTournaments[item]
-        }
-      })
-    }
   }
 }
 </script>

@@ -26,7 +26,7 @@
           <nuxt-link class="tournament__nav-item" :to="`/tournaments/${game}/${id}/rules`">Rules</nuxt-link>
           <nuxt-link class="tournament__nav-item" :to="`/tournaments/${game}/${id}/support`">Support</nuxt-link>
         </div>
-        <nuxt-child class="tournament__info"/>
+        <nuxt-child class="tournament__info" :setRegister="registered"/>
       </div>
       <div class="tournament__requirements">
         <div class="tournament__requirements-title">Requirements</div>
@@ -70,26 +70,42 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  computed: mapGetters(['getTournaments', 'getGames', 'getUser']),
+  async asyncData({ $fire }) {
+    const gamesRef = $fire.database.ref('games')
+    let games, tournaments
+    try {
+      const snapshot = await gamesRef.once('value')
+      games = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    const tournamentsRef = $fire.database.ref('tournaments')
+    try {
+      const snapshot = await tournamentsRef.once('value')
+      tournaments = snapshot.val()
+    } catch (e) {
+      this.$toasted.error(e)
+    }
+    return { games, tournaments }
+  },
+  computed: mapGetters(['getUser']),
   mounted() {
     this.id = this.$route.params.id
     this.game = this.$route.params.game
-    this.$store.dispatch('setTournamentsAction')
-    this.$store.dispatch('setGamesAction')
+    Object.keys(this.games).forEach(item => {
+      if(this.games[item].title === this.game) {
+        this.icon = this.games[item].gameIconImg
+      }
+    })
+    Object.keys(this.tournaments).forEach(item => {
+      if(this.tournaments[item].id === this.id) {
+        this.tournament = this.tournaments[item]
+        if(this.tournaments[item].players) {
+          this.players = +Object.keys(this.tournaments[item].players).length
+        }
+      }
+    })
     setTimeout(() => {
-      Object.keys(this.getGames).forEach(item => {
-        if(this.getGames[item].title === this.game) {
-          this.icon = this.getGames[item].gameIconImg
-        }
-      })
-      Object.keys(this.getTournaments).forEach(item => {
-        if(this.getTournaments[item].id === this.id) {
-          this.tournament = this.getTournaments[item]
-          if(this.getTournaments[item].players) {
-            this.players = +Object.keys(this.getTournaments[item].players).length
-          }
-        }
-      })
       if(this.tournament.players) {
         Object.keys(this.tournament.players).forEach(item => {
           if(this.tournament.players[item].id === this.getUser.id) {
@@ -97,7 +113,7 @@ export default {
           }
         })
       }
-    }, 500)
+    }, 300)
   },
   data() {
     return {

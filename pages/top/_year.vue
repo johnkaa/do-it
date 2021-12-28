@@ -25,16 +25,18 @@
 
 <script>
 export default {
-  async fetch() {
-    const topRef = this.$fire.database.ref('top')
+  async asyncData({ params, $fire }) {
+    const topRef = $fire.database.ref('top')
     try {
       const snapshot = await topRef.once('value')
-      this.tournaments = snapshot.val()[this.year].tournaments
-      this.prize = snapshot.val()[this.year].prize
-      this.totalPlayers = snapshot.val()[this.year].totalPlayers
-      Object.keys(snapshot.val()).forEach(item => this.years.push(item))
+      const tournaments = snapshot.val()[params.year].tournaments
+      const prize = snapshot.val()[params.year].prize
+      const totalPlayers = snapshot.val()[params.year].totalPlayers
+      let years = []
+      Object.keys(snapshot.val()).forEach(item => years.push(item))
+      return { tournaments, prize, totalPlayers, years }
     } catch (e) {
-      this.$toasted.error(e)
+      console.log(e)
     }
   },
   watch: {

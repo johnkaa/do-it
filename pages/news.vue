@@ -33,7 +33,7 @@ export default {
       const newsObj = snapshot.val()
       return { newsObj }
     } catch (e) {
-      this.$toasted.error(e)
+      console.log(e)
     }
   },
   computed: {

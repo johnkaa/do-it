@@ -75,11 +75,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
+  async asyncData({ $fire }) {
+    const gamesRef = $fire.database.ref('games')
+    let games, tournamentsObj
+    try {
+      const snapshot = await gamesRef.once('value')
+      games = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    const tournamentsRef = $fire.database.ref('tournaments')
+    try {
+      const snapshot = await tournamentsRef.once('value')
+      tournamentsObj = snapshot.val()
+    } catch (e) {
+      this.$toasted.error(e)
+    }
+    return { games, tournamentsObj }
+  },
   computed: {
-    ...mapGetters(['getTournaments', 'getGames']),
     filteredTournaments() {
       let tournaments = this.tournaments
       if(this.mode) {
@@ -107,20 +123,16 @@ export default {
   },
   mounted() {
     this.game = this.$route.params.game
-    this.$store.dispatch('setTournamentsAction')
-    this.$store.dispatch('setGamesAction')
-    setTimeout(() => {
-      Object.keys(this.getGames).forEach(item => {
-        if(this.getGames[item].title === this.game) {
-          this.icon = this.getGames[item].gameIconImg
-        }
-      })
-      Object.keys(this.getTournaments).forEach(item => {
-        if(this.getTournaments[item].game === this.game) {
-          this.tournaments.push(this.getTournaments[item])
-        }
-      })
-    }, 500)
+    Object.keys(this.games).forEach(item => {
+      if(this.games[item].title === this.game) {
+        this.icon = this.games[item].gameIconImg
+      }
+    })
+    Object.keys(this.tournamentsObj).forEach(item => {
+      if(this.tournamentsObj[item].game === this.game) {
+        this.tournaments.push(this.tournamentsObj[item])
+      }
+    })
   },
   data() {
     return {

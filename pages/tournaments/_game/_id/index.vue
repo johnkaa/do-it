@@ -36,18 +36,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
-  computed: mapGetters(['getTournaments']),
+  async asyncData({ $fire }) {
+    const tournamentsRef = $fire.database.ref('tournaments')
+    try {
+      const snapshot = await tournamentsRef.once('value')
+      const tournaments = snapshot.val()
+      return { tournaments }
+    } catch (e) {
+      console.log(e)
+    }
+  },
   mounted() {
     this.id = this.$route.params.id
-    setTimeout(() => {
-      Object.keys(this.getTournaments).forEach(item => {
-        if(this.getTournaments[item].id === this.id) {
-          this.tournament = this.getTournaments[item]
-        }
-      })
-    }, 500)
+    Object.keys(this.tournaments).forEach(item => {
+      if(this.tournaments[item].id === this.id) {
+        this.tournament = this.tournaments[item]
+      }
+    })
   },
   data() {
     return {

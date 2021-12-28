@@ -28,13 +28,14 @@ const { getCode } = require('country-list');
 
 export default {
   props: ['year'],
-  async fetch() {
-    const topRef = this.$fire.database.ref('top')
+  async asyncData({ params, $fire }) {
+    const topRef = $fire.database.ref('top')
     try {
       const snapshot = await topRef.once('value')
-      this.teams = snapshot.val()[this.year].teams
+      const teams = snapshot.val()[params.year].teams
+      return { teams }
     } catch (e) {
-      this.$toasted.error(e)
+      console.log(e)
     }
   },
   watch: {

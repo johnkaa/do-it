@@ -19,7 +19,6 @@
 <script>
 import { mapGetters } from 'vuex'
 const { getCode } = require('country-list');
-
 export default {
   computed: {
     ...mapGetters(['getTournaments', 'getPlayers']),
@@ -70,47 +69,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .players {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    &__item {
-      background-color: #151A1F;
-      border-radius: 4px;
-      &-img {
-        width: 190px;
-        height: 190px;
-        img {
-          border-top-left-radius: 2px;
-          border-top-right-radius: 2px;
-          object-fit: cover;
-        }
-      }
-      &-title {
-        display: flex;
-        gap: 8px;
-        padding: 15px 15px 8px;
-      }
-      &-name {
-        color: #E6E8EB;
-        font-size: 14px;
-        font-weight: 500;
-      }
-      &-flag {
-        margin-top: -8px;
-      }
-      &-status {
-        padding: 0 15px 15px;
-        color: #525C66;
-        font-size: 12px;
+.players {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  &__item {
+    background-color: #151A1F;
+    border-radius: 4px;
+    &-img {
+      width: 190px;
+      height: 190px;
+      img {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        object-fit: cover;
       }
     }
-    &__not-found {
-      color: #B83333;
-      text-align: center;
-      margin: 50px auto;
-      font-size: 30px;
+    &-title {
+      display: flex;
+      gap: 8px;
+      padding: 15px 15px 8px;
+    }
+    &-name {
+      color: #E6E8EB;
+      font-size: 14px;
       font-weight: 500;
     }
+    &-flag {
+      margin-top: -8px;
+    }
+    &-status {
+      padding: 0 15px 15px;
+      color: #525C66;
+      font-size: 12px;
+    }
   }
+  &__not-found {
+    color: #B83333;
+    text-align: center;
+    margin: 50px auto;
+    font-size: 30px;
+    font-weight: 500;
+  }
+}
 </style>

@@ -60,7 +60,7 @@ export default {
       const items = snapshot.val()
       return { items }
     } catch (e) {
-      this.$toasted.error(e)
+      console.log(e)
     }
   },
   computed: mapGetters(['getUser']),

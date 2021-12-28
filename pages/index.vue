@@ -56,7 +56,7 @@
     <div class="home__items home__games">
       <div class="home__items-title title">Games</div>
       <default-slider>
-        <swiper-slide class="home__items-slide" slot="slide" v-for="item in getGames" :key="item.id">
+        <swiper-slide class="home__items-slide" slot="slide" v-for="item in games" :key="item.id">
           <games-card :title="item.title" :img="item.img" :mainPage="true"/>
         </swiper-slide>
       </default-slider>
@@ -65,18 +65,48 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   head: {
     title: 'Home'
   },
+  async asyncData({ $fire }) {
+    let tournamentsObj, games, newsObj, partners
+    const tournamentsRef = $fire.database.ref('tournaments')
+    try {
+      const snapshot = await tournamentsRef.once('value')
+      tournamentsObj = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    const newsRef = $fire.database.ref('news')
+    try {
+      const snapshot = await newsRef.once('value')
+      newsObj = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    const gamesRef = $fire.database.ref('games')
+    try {
+      const snapshot = await gamesRef.once('value')
+      games = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    const partnersRef = $fire.database.ref('partners')
+    try {
+      const snapshot = await partnersRef.once('value')
+      partners = snapshot.val()
+    } catch (e) {
+      console.log(e)
+    }
+    return { tournamentsObj, newsObj, games, partners }
+  },
   computed: {
-    ...mapGetters(['getTournaments', 'getNews', 'getGames']),
     filteredTournaments() {
       let tournaments = []
-      Object.keys(this.getTournaments).forEach(item => {
-        tournaments.push(this.getTournaments[item])
+      Object.keys(this.tournamentsObj).forEach(item => {
+        tournaments.push(this.tournamentsObj[item])
       })
       if(this.filteredGameTournaments !== '' && this.filteredGameTournaments !== 'All') {
         return tournaments.filter(element => {
@@ -88,8 +118,8 @@ export default {
     },
     filteredNews() {
       let news = []
-      Object.keys(this.getNews).forEach(item => {
-        news.push(this.getNews[item])
+      Object.keys(this.newsObj).forEach(item => {
+        news.push(this.newsObj[item])
       })
       if(this.filteredGameNews !== '' && this.filteredGameNews !== 'All') {
         if(news.filter(element => {
@@ -106,16 +136,10 @@ export default {
       }
     },
   },
-  async fetch() {
-    await this.getPartners()
-  },
   mounted() {
     this.getUser()
-    this.$store.dispatch('setGamesAction')
-    this.$store.dispatch('setNewsAction')
-    this.$store.dispatch('setTournamentsAction')
-    Object.keys(this.getNews).forEach(item => {
-      this.news.push(this.getNews[item])
+    Object.keys(this.newsObj).forEach(item => {
+      this.news.push(this.newsObj[item])
     })
   },
   data() {
@@ -136,15 +160,6 @@ export default {
           this.auth = true
         }
       })
-    },
-    async getPartners() {
-      const partnersRef = this.$fire.database.ref('partners')
-      try {
-        const snapshot = await partnersRef.once('value')
-        this.partners = snapshot.val()
-      } catch (e) {
-        console.log(e)
-      }
     },
     updateGameTournamentsFilter(game) {
       this.filteredGameTournaments = game
