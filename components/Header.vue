@@ -67,7 +67,7 @@
     <div class="header__user" :class="{ active: userActive }" v-if="$fire.auth.currentUser" @mouseout="setUserActive" @mouseover="setUserActive">
       <div class="header__user-wrapper">
         <div class="header__user-img">
-          <img :src="getUser.img" alt="">
+<!--          <img :src="getUser.img" alt="">-->
         </div>
 <!--        <div class="header__user-info">-->
 <!--          <div class="header__user-name">{{ getUser.username }}</div>-->
