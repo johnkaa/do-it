@@ -53,11 +53,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  async fetch() {
-    const shopRef = this.$fire.database.ref('shop')
+  async asyncData({ $fire }) {
+    const shopRef = $fire.database.ref('shop')
     try {
       const snapshot = await shopRef.once('value')
-      this.items = snapshot.val()
+      const items = snapshot.val()
+      return { items }
     } catch (e) {
       this.$toasted.error(e)
     }

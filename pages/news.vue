@@ -21,14 +21,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   head: {
     title: 'News'
   },
+  async asyncData({ $fire }) {
+    const newsRef = $fire.database.ref('news')
+    try {
+      const snapshot = await newsRef.once('value')
+      const newsObj = snapshot.val()
+      return { newsObj }
+    } catch (e) {
+      this.$toasted.error(e)
+    }
+  },
   computed: {
-    ...mapGetters(['getNews']),
     filteredNews() {
       let news = this.news
       if(this.filteredGame !== '' && this.filteredGame !== 'All') {
@@ -41,8 +49,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('setNewsAction')
-    Object.keys(this.getNews).forEach(item => this.news.push(this.getNews[item]))
+    Object.keys(this.newsObj).forEach(item => this.news.push(this.newsObj[item]))
   },
   data() {
     return {

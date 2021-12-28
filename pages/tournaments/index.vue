@@ -16,14 +16,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   head: {
     title: 'Tournaments'
   },
+  async asyncData({ $fire }) {
+    const gamesRef = $fire.database.ref('games')
+    try {
+      const snapshot = await gamesRef.once('value')
+      const gamesObj = snapshot.val()
+      return { gamesObj }
+    } catch (e) {
+      this.$toasted.error(e)
+    }
+  },
   computed: {
-    ...mapGetters(['getGames']),
     filteredGames() {
       return this.games.filter(element => {
         return element.title.toLowerCase().includes(this.searchField.toLowerCase())
@@ -31,10 +39,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('setGamesAction')
-    setTimeout(() => {
-      Object.keys(this.getGames).forEach(item => this.games.push(this.getGames[item]))
-    }, 200)
+    Object.keys(this.gamesObj).forEach(item => this.games.push(this.gamesObj[item]))
   },
   data() {
     return {
