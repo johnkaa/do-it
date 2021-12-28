@@ -64,39 +64,39 @@
         <my-button>Sign Up</my-button>
       </nuxt-link>
     </div>
-    <div class="header__user" :class="{ active: userActive }" v-if="$fire.auth.currentUser" @mouseout="userActive = !userActive" @mouseover="userActive = !userActive">
-      <div class="header__user-wrapper">
-        <div class="header__user-img">
-          <img :src="getUser.img" alt="">
-        </div>
-        <div class="header__user-info">
-          <div class="header__user-name">{{ getUser.username }}</div>
-          <div class="header__user-balance">{{ getUser.eur }} EUR / {{ getUser.dtc }} DTC</div>
-        </div>
-      </div>
-      <div class="header__user-inner">
-        <div class="header__user-lvl">
-          <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>
-          <div class="header__user-lvl-bar">
-            <span :style="{ width: getUser.lvl + '%' }"></span>
-          </div>
-        </div>
-        <div class="header__user-links">
-          <nuxt-link class="header__user-link" v-if="getUser.id === 16381161807" to="/admin/tournaments">Admin</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player">My profile</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player/team">My team</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player/balance/withdraw">Withdraw</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player/balance/deposit">Deposit</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player/subscribe">Premium</nuxt-link>
-          <nuxt-link class="header__user-link" to="/">Statistics</nuxt-link>
-        </div>
-        <div class="header__user-links">
-          <nuxt-link class="header__user-link" to="/player/support">Support</nuxt-link>
-          <nuxt-link class="header__user-link" to="/player/settings">Settings</nuxt-link>
-          <div class="header__user-link" @click="logout">Logout</div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="header__user" :class="{ active: userActive }" v-if="$fire.auth.currentUser" @mouseout="userActive = !userActive" @mouseover="userActive = !userActive">-->
+<!--      <div class="header__user-wrapper">-->
+<!--        <div class="header__user-img">-->
+<!--          <img :src="getUser.img" alt="">-->
+<!--        </div>-->
+<!--        <div class="header__user-info">-->
+<!--          <div class="header__user-name">{{ getUser.username }}</div>-->
+<!--          <div class="header__user-balance">{{ getUser.eur }} EUR / {{ getUser.dtc }} DTC</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="header__user-inner">-->
+<!--        <div class="header__user-lvl">-->
+<!--          <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>-->
+<!--          <div class="header__user-lvl-bar">-->
+<!--            <span :style="{ width: getUser.lvl + '%' }"></span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="header__user-links">-->
+<!--          <nuxt-link class="header__user-link" v-if="getUser.id === 16381161807" to="/admin/tournaments">Admin</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player">My profile</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player/team">My team</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player/balance/withdraw">Withdraw</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player/balance/deposit">Deposit</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player/subscribe">Premium</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/">Statistics</nuxt-link>-->
+<!--        </div>-->
+<!--        <div class="header__user-links">-->
+<!--          <nuxt-link class="header__user-link" to="/player/support">Support</nuxt-link>-->
+<!--          <nuxt-link class="header__user-link" to="/player/settings">Settings</nuxt-link>-->
+<!--          <div class="header__user-link" @click="logout">Logout</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </header>
 </template>
 
