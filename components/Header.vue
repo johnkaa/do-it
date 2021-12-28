@@ -3,59 +3,59 @@
     <nuxt-link class="header__logo" to="/">
       <img class="header__logo-img" src="/images/logo.png" alt="" @click="setBurgerActiveLogo">
     </nuxt-link>
-    <div class="burger" :class="{ active: burgerActive }" @click="setBurgerActive">
-      <div class="dash"></div>
-      <div class="dash"></div>
-      <div class="dash"></div>
-    </div>
-    <div class="burger__menu" :class="{ active: burgerActive }" @click="setBurgerActive">
-      <ul class="menu__list">
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/games">Games</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/shop">Shop</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>
-        </li>
-        <li class="menu__list-item" v-if="!$fire.auth.currentUser">
-          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/login">
-            <my-button class="secondary">Login</my-button>
-          </nuxt-link>
-        </li>
-        <li class="menu__list-item" v-if="!$fire.auth.currentUser">
-          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/register">
-            <my-button>Sign Up</my-button>
-          </nuxt-link>
-        </li>
-      </ul>
-    </div>
-    <nav class="menu">
-      <ul class="menu__list">
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/games">Games</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/shop">Shop</nuxt-link>
-        </li>
-        <li class="menu__list-item">
-          <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>
-        </li>
-      </ul>
-    </nav>
+<!--    <div class="burger" :class="{ active: burgerActive }" @click="setBurgerActive">-->
+<!--      <div class="dash"></div>-->
+<!--      <div class="dash"></div>-->
+<!--      <div class="dash"></div>-->
+<!--    </div>-->
+<!--    <div class="burger__menu" :class="{ active: burgerActive }" @click="setBurgerActive">-->
+<!--      <ul class="menu__list">-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/games">Games</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/shop">Shop</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item" v-if="!$fire.auth.currentUser">-->
+<!--          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/login">-->
+<!--            <my-button class="secondary">Login</my-button>-->
+<!--          </nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item" v-if="!$fire.auth.currentUser">-->
+<!--          <nuxt-link class="menu__list-link burger-menu__btn" to="/auth/register">-->
+<!--            <my-button>Sign Up</my-button>-->
+<!--          </nuxt-link>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <nav class="menu">-->
+<!--      <ul class="menu__list">-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/tournaments">Play</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/news">News</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/games">Games</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/shop">Shop</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class="menu__list-item">-->
+<!--          <nuxt-link class="menu__list-link" to="/sponsorship">Sponsorship</nuxt-link>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
     <div class="header__btns" v-if="!$fire.auth.currentUser">
       <nuxt-link class="header__btn" to="/auth/login">
         <my-button class="secondary">Login</my-button>
