@@ -69,14 +69,14 @@
         <div class="header__user-img">
           <img :src="getUser.img" alt="">
         </div>
-        <div class="header__user-info">
-          <div class="header__user-name">{{ getUser.username }}</div>
-          <div class="header__user-balance">{{ getUser.eur }} EUR / {{ getUser.dtc }} DTC</div>
-        </div>
+<!--        <div class="header__user-info">-->
+<!--          <div class="header__user-name">{{ getUser.username }}</div>-->
+<!--          <div class="header__user-balance">{{ getUser.eur }} EUR / {{ getUser.dtc }} DTC</div>-->
+<!--        </div>-->
       </div>
       <div class="header__user-inner">
         <div class="header__user-lvl">
-          <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>
+<!--          <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>-->
 <!--          <div class="header__user-lvl-bar">-->
 <!--            <span :style="{ width: getUser.lvl + '%' }"></span>-->
 <!--          </div>-->
