@@ -64,7 +64,7 @@
         <my-button>Sign Up</my-button>
       </nuxt-link>
     </div>
-    <div class="header__user" :class="{ active: userActive }" @mouseout="userActive = !userActive" @mouseover="userActive = !userActive" v-else>
+    <div class="header__user" :class="{ active: userActive }" v-else @mouseout="userActive = !userActive" @mouseover="userActive = !userActive">
       <div class="header__user-wrapper">
         <div class="header__user-img">
           <img :src="getUser.img" alt="">
