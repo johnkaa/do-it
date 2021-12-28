@@ -77,9 +77,9 @@
       <div class="header__user-inner">
         <div class="header__user-lvl">
           <span class="header__user-lvl-text">LVL {{ getUser.lvl }}</span>
-          <div class="header__user-lvl-bar">
-            <span :style="{ width: getUser.lvl + '%' }"></span>
-          </div>
+<!--          <div class="header__user-lvl-bar">-->
+<!--            <span :style="{ width: getUser.lvl + '%' }"></span>-->
+<!--          </div>-->
         </div>
 <!--        <div class="header__user-links">-->
 <!--          <nuxt-link class="header__user-link" v-if="getUser.id === 16381161807" to="/admin/tournaments">Admin</nuxt-link>-->
