@@ -31,6 +31,7 @@ export default {
     { src: '~plugins/flags', mode: 'client' },
   ],
 
+  loading: '~/components/Loader',
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
