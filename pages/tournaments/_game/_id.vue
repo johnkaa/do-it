@@ -49,13 +49,13 @@
         <div class="tournament__requirements-sign">
           <div class="tournament__requirements-sign-warning">Register close in {{ tournament.startDate }}</div>
           <div class="tournament__requirements-sign-btn" @click="unregister" v-if="registered">
-            <my-button class="secondary">Unregister</my-button>
+            <my-button class="secondary" :disabled="delay">Unregister</my-button>
           </div>
           <nuxt-link class="tournament__requirements-sign-btn" v-else-if="!this.$fire.auth.currentUser" to="/auth/login">
             <my-button>Log in / Register</my-button>
           </nuxt-link>
           <div class="tournament__requirements-sign-btn" @click="register" v-else>
-            <my-button>Register</my-button>
+            <my-button :disabled="delay">Register</my-button>
           </div>
         </div>
         <div class="tournament__requirements-sm">
@@ -122,11 +122,13 @@ export default {
       icon: '',
       tournament: '',
       registered: false,
-      players: ''
+      players: '',
+      delay: null
     }
   },
   methods: {
     async register() {
+      this.delay = true
       if(this.tournament.entryPrice === 'Premium' && this.getUser.subscribe === 'free') {
         return this.$toasted.error('This league only for premium users')
       }
@@ -159,8 +161,10 @@ export default {
       this.registered = true
       this.players++
       this.$toasted.success('You have registered')
+      setTimeout(() => this.delay = null, 100)
     },
     async unregister() {
+      this.delay = true
       const tournamentsRef = await this.$fire.database.ref(`tournaments/${this.id}/players/${this.getUser.id}`)
       try {
         await tournamentsRef.set(null)
@@ -178,6 +182,7 @@ export default {
       this.registered = false
       this.players--
       this.$toasted.success('You leave')
+      setTimeout(() => this.delay = null, 100)
     }
   }
 }
