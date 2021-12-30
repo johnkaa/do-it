@@ -74,6 +74,9 @@ export default {
   },
   methods: {
     async buy() {
+      if(!this.$fire.auth.currentUser) {
+        return this.$toasted.error('Please login in your account')
+      }
       const price = +this.price.slice(1)
       if(this.getUser.eur < price) {
         return this.$toasted.error("You don't have enough money")
