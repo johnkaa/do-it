@@ -38,12 +38,12 @@
           <news-card :mainPage="true" :img="item.img" :title="item.title" :text="item.text"/>
         </swiper-slide>
       </filtered-slider>
-      <!-- <filtered-slider class="home__items-item">
+      <filtered-slider class="home__items-item">
         <div class="home__items-title title streams" slot="title">Streams</div>
         <swiper-slide class="home__items-slide" slot="slide" v-for="item in 6" :key="item">
           <iframe height="420" width="370" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </swiper-slide>
-      </filtered-slider> -->
+      </filtered-slider>
     </div>
     <div class="home__partners" id="sponsors">
       <div class="home__partners-title title">Partners</div>
